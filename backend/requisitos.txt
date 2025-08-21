@@ -1,0 +1,1 @@
+fica aqui o setup do python e afins
