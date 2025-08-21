@@ -1,12 +1,15 @@
 import os
+from dotenv import load_dotenv
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv()
 
 class Config:
-    # Chave secreta para proteger formulários e sessões
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'uma-chave-super-secreta-aqui-mude-em-producao'
-
-    # Configuração do banco de dados SQLite
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'app.db')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key')
+    DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
+    DATABASE_FILE = os.getenv('DATABASE_FILE', 'data/database.json')
+    APP_NAME = "Flask JSON API"
+    APP_VERSION = "1.0.0"
+    
+    # Remover configurações do SQLAlchemy
+    # SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///app.db')
+    # SQLALCHEMY_TRACK_MODIFICATIONS = False

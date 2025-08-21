@@ -1,30 +1,28 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from config import Config
+from flask_cors import CORS
 
-# Inicializa extensões (ainda não vinculadas a uma app)
-db = SQLAlchemy()
-migrate = Migrate()
-
-def create_app(config_class=Config):
-    """Função fábrica para criar a instância da aplicação Flask."""
+def create_app():
     app = Flask(__name__)
-    app.config.from_object(config_class)
-
-    # Inicializa extensões com a app
-    db.init_app(app)
-    migrate.init_app(app, db)
-
-    # Registra Blueprints (faremos isso depois)
-    from app.routes.main import bp as main_bp
-    app.register_blueprint(main_bp)
-    # from app.routes import tasks, auth  # Vamos descomentar quando criarmos estes
-    # app.register_blueprint(tasks.bp)
-    # app.register_blueprint(auth.bp)
-
-    # Cria as tabelas no banco (para desenvolvimento)
-    with app.app_context():
-        db.create_all()
-
+    
+    # Configurações básicas
+    app.config['SECRET_KEY'] = 'dev-secret-key'
+    app.config['DEBUG'] = True
+    app.config['DATABASE_FILE'] = 'data/database.json'
+    
+    # Habilitar CORS
+    CORS(app)
+    
+    # Inicializar o banco JSON
+    from app.utils.json_db import init_json_db
+    init_json_db()
+    
+    # Registrar blueprints
+    from app.routes.users import users_bp
+    from app.routes.products import products_bp
+    from app.routes.tasks import tasks_bp
+    
+    app.register_blueprint(users_bp, url_prefix='/api/users')
+    app.register_blueprint(products_bp, url_prefix='/api/products')
+    app.register_blueprint(tasks_bp, url_prefix='/api/tasks')
+    
     return app
