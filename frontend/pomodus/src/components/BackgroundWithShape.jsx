@@ -1,5 +1,5 @@
-import React from 'react'
-import { Box, Typography } from '@mui/material';
+// fundo do negocinho
+import { Box } from '@mui/material';
 
 
 const BackgroundWithShape = () => {
