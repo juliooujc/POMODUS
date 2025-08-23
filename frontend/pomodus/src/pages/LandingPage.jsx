@@ -2,10 +2,11 @@
 import { Box, Stack, Typography, Button } from '@mui/material'
 import BackgroundWithShape from '../components/BackgroundWithShape';
 import Header from '../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 const giantButtonSx = {
     padding: { xs: '12px 24px', md: '16px ' },
-    width:{md:'24vw', xs: '50vw'},
+    width: { md: '24vw', xs: '50vw' },
     fontSize: { xs: '1rem', md: '1rem' },
     fontWeight: 'lighter',
     borderRadius: '16px',
@@ -13,16 +14,28 @@ const giantButtonSx = {
 };
 
 const LandingPage = () => {
+    const navigate = useNavigate();
+
+    const HandleCadastro = (e) => {
+        e.preventDefault();
+        navigate('/signin');
+    };
+
+    const HandleLogin = (e) => {
+        e.preventDefault();
+        navigate('/login');
+    };
+
     return (
         <Box>
             <Header />
-            <Box 
+            <Box
                 sx={{
                     paddingTop: { xs: '8vh', md: '10vh' },
                     display: 'flex',
                     flexDirection: { xs: 'column', md: 'row' },
                     minHeight: '100vh'
-                } }
+                }}
             >
                 <BackgroundWithShape />
                 {/* Área branca - logo + textos */}
@@ -33,7 +46,7 @@ const LandingPage = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         textAlign: 'center',
-                        ml:{xs:9, md:15}
+                        ml: { xs: 9, md: 15 }
                     }}
                 >
                     {/* Logo */}
@@ -51,9 +64,9 @@ const LandingPage = () => {
 
                     {/* Subtítulo */}
                     <Typography variant="body2" color="text.primary"
-                    sx={{
-                        fontSize: { xs: '1.5rem', md: '1.5rem' }
-                    }}
+                        sx={{
+                            fontSize: { xs: '1.5rem', md: '1.5rem' }
+                        }}
                     > Seu assistente de tarefas.</Typography>
                 </Stack>
 
@@ -65,14 +78,14 @@ const LandingPage = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                         textAlign: 'center',
-                        ml:{xs:9, md:50}
+                        ml: { xs: 9, md: 50 }
                     }}
                 >
                     {/* Texto de descrição */}
                     <Typography variant="body1"
                         sx={{
                             fontSize: { xs: '1rem', md: '1.2rem' },
-                            color: {md:'white', xs:'text.primary'}
+                            color: { md: 'white', xs: 'text.primary' }
                         }}
                     >
                         Transforme minutos em conquistas: <br />
@@ -82,12 +95,12 @@ const LandingPage = () => {
 
                     {/* Botões */}
                     <Stack spacing={3} alignItems="center">
-                    <Button variant="contained" color="primary" size="large" sx={giantButtonSx}>
-                        Criar Conta
-                    </Button>
-                    <Button variant="contained" color="error" size="large" sx={giantButtonSx}>
-                        Fazer Login
-                    </Button>
+                        <Button variant="contained" color="primary" size="large" sx={giantButtonSx} onClick={HandleCadastro}>
+                            Criar Conta
+                        </Button>
+                        <Button variant="contained" color="error" size="large" sx={giantButtonSx} onClick={HandleLogin}>
+                            Fazer Login
+                        </Button>
                     </Stack>
                 </Stack>
             </Box>
