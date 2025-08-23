@@ -1,13 +1,21 @@
-// header.jsx
-import { Paper, Typography } from '@mui/material'
+import { Paper, Typography, Button} from '@mui/material'
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  
+  const navigate = useNavigate();
+
+  const handleHome = () => {
+    navigate("/pages/home")
+  }
+
   return (
     <Paper elevation={3}
-    sx={{
+      sx={{
         backgroundColor: 'primary.main',
-        width: '100vw',
-        height: { xs: '56px', md: '64px' },
+        width: '100%',
+        height: { xs: '8vh', md: '10vh' },
+        justifyContent:"space-between",
 
         // o que garante ele ficar acima de todos    
         position: 'absolute',
@@ -16,15 +24,22 @@ const Header = () => {
         // pra alinhar o texto pomodus
         display: 'flex',        
         alignItems: 'center',
-        padding: 2
-    }}>
+        top:0,
+        gap: 'auto'
+      }}>
 
-        <Typography variant="h3" color="secondary.main" sx={{
-            paddingLeft: { xs: 4, md: 6 }, 
-            fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' }
+      <Typography variant="h3" color="white" 
+        sx={{ 
+          fontSize: { xs: '1.2rem', md: '1.4rem'},
+          fontFamily: 'cursive',
+          ml: 3
         }}>
-            Pomodus
-        </Typography>
+        Pomodus
+      </Typography>
+
+      <Button variant='contained' sx={{ mr:3 }} onClick={handleHome}>
+        Sair
+      </Button>
     </Paper>
   )
 }

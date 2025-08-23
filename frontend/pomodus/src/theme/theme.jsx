@@ -9,6 +9,12 @@ const theme = createTheme({
     secondary: {
       main: '#D9D9D9', // branco
     },
+    tertiary:{
+      main:  '#2196F3' // azul
+    },
+    quartiary:{
+      main : '#ffcdd2' // vermelho claro
+    }
   },
 });
 

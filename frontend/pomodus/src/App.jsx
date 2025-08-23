@@ -1,11 +1,14 @@
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme/theme'
-import LandingPage from './pages/LandingPage';
+
+import AppRoutes from './routes/AppRoutes';
+import Header from './components/Header';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <LandingPage />
+      <Header/>
+      <AppRoutes/>
     </ThemeProvider>
   )
 }

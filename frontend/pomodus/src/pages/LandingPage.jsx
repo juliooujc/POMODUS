@@ -3,14 +3,11 @@ import { Box, Stack, Typography, Button } from '@mui/material'
 import BackgroundWithShape from '../components/BackgroundWithShape';
 import Header from '../components/Header';
 
-// sistema de Z-index
-
-// style: buttons
 const giantButtonSx = {
-    padding: { xs: '12px 24px', md: '20px 96px' },
-    fontSize: { xs: '1rem', md: '3.5rem' },
+    padding: { xs: '12px 24px', md: '16px ' },
+    width:{md:'24vw', xs: '50vw'},
+    fontSize: { xs: '1rem', md: '1rem' },
     fontWeight: 'lighter',
-    minWidth: { xs: '180px', md: '250px' },
     borderRadius: '16px',
     fontFamily: 'cursive'
 };
@@ -19,42 +16,81 @@ const LandingPage = () => {
     return (
         <Box>
             <Header />
-            <Box sx={{
-                position: 'relative',
-                paddingTop: { xs: '56px', md: '64px' }
-            }}>
+            <Box 
+                sx={{
+                    paddingTop: { xs: '8vh', md: '10vh' },
+                    display: 'flex',
+                    flexDirection: { xs: 'column', md: 'row' },
+                    minHeight: '100vh'
+                } }
+            >
                 <BackgroundWithShape />
-                {/* Stack da logo + texto que ficam no lado branco */}
-                <Stack spacing={2} sx={{ 
-                    position: 'absolute',
-                    top: '30%',
-                    left: '10%',
-                    alignItems: 'center'
-                }}>
-                    {/* Logo do app*/}
-                    <img src="interface/logo.svg" alt="" style={{ height: 'auto' }} />
+                {/* Área branca - logo + textos */}
+                <Stack
+                    spacing={2}
+                    sx={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        textAlign: 'center',
+                        ml:{xs:9, md:15}
+                    }}
+                >
+                    {/* Logo */}
+                    <Box sx={{ height: { xs: 150, md: 200 } }}>
+                        <img src="interface/logo.svg" alt="logo" style={{ height: '100%' }} />
+                    </Box>
 
-                    {/* Texto */}
-                    <Typography variant="h1" color="initial" sx={{ textAlign: 'center', fontSize: { xs: '3rem', md: '4.5rem' }, fontFamily: 'cursive' }}>Pomodus</Typography>
-                    <Typography variant="body2" color="initial" sx={{ textAlign: 'center', fontSize: { xs: '1rem', md: '3.5rem' }, fontFamily: 'fantasy' }}>Seu assistente de Tarefas</Typography>
+                    {/* Título */}
+                    <Typography variant="h1" color="text.primary"
+                        sx={{
+                            fontSize: { xs: '2.5rem', md: '2.5rem' },
+                            fontFamily: 'cursive'
+                        }}
+                    >Pomodus</Typography>
+
+                    {/* Subtítulo */}
+                    <Typography variant="body2" color="text.primary"
+                    sx={{
+                        fontSize: { xs: '1.5rem', md: '1.5rem' }
+                    }}
+                    > Seu assistente de tarefas.</Typography>
                 </Stack>
 
-                {/* Stack dos botões que ficam no lado vermelho */}
-                <Stack spacing={12} sx={{
-                    position: 'absolute',
-                    top: '40%',
-                    right: '20%',
-                    alignItems: 'center'
-                }}>
-                    <Button variant="contained" color="success" size='large' sx={giantButtonSx}>
-                        Cadastrar
+                {/* Área vermelha - texto + botões */}
+                <Stack
+                    spacing={6}
+                    sx={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        textAlign: 'center',
+                        ml:{xs:9, md:50}
+                    }}
+                >
+                    {/* Texto de descrição */}
+                    <Typography variant="body1"
+                        sx={{
+                            fontSize: { xs: '1rem', md: '1.2rem' },
+                            color: {md:'white', xs:'text.primary'}
+                        }}
+                    >
+                        Transforme minutos em conquistas: <br />
+                        gerencie suas tarefas com foco total <br />
+                        usando a técnica Pomodoro.
+                    </Typography>
+
+                    {/* Botões */}
+                    <Stack spacing={3} alignItems="center">
+                    <Button variant="contained" color="primary" size="large" sx={giantButtonSx}>
+                        Criar Conta
                     </Button>
-                    <Button variant="contained" color="error" size='large' sx={giantButtonSx}>
+                    <Button variant="contained" color="error" size="large" sx={giantButtonSx}>
                         Fazer Login
                     </Button>
+                    </Stack>
                 </Stack>
             </Box>
-
         </Box>
     )
 }

@@ -5,36 +5,39 @@ const BackgroundWithShape = () => {
     return (
         // quadrado vermelho
         <Box sx={{
-            backgroundColor: 'primary.main', // vermelho
-            width: '100vw',
+            position: 'absolute',
+            top: {xs:'8vh', md:'10vh'},
+            left: 0,
+            zIndex: -1,
+            backgroundColor: {md:'primary.main', xs:'secondary.main'}, 
+            width: '100%',
             height: '100vh',
             overflow: 'hidden'
-
         }}>
-            {/* Quadrado branco */}
-            <Box
-                sx={{
-                    backgroundColor: 'secondary.main',
-                    width: '40vw',
-                    height: '100vh',
-                    top: 0,
-                    left: 0,
-                }}>
 
-                {/* Elipse branco */}
-                <Box sx={{
-                    position: 'absolute',
-                    backgroundColor: 'secondary.main',
-                    width: '20vw',
-                    height: '100vh',
-                    marginLeft: '30vw',
-                    borderTopRightRadius: '50%', // tem aqui ajustar a elipse aq
-                    borderBottomRightRadius: '40%',
-                    display: { xs: 'none', md: 'block' }, // escondida na tela
-                }}></Box>
-
-            </Box>
-        </Box>
+        {/* Quadrado branco - escondido no XS */}
+        <Box sx={{
+            backgroundColor: 'secondary.main',
+            width: '35vw',
+            height: '100vh',
+            display: { xs: 'none', md: 'block' }
+            }}
+        >
+        {/* Elipse branca - só aparece no MD+ */}
+        <Box
+          sx={{
+            position: 'absolute',
+            backgroundColor: 'secondary.main',
+            width: '20vw',
+            height: '100vh',
+            marginLeft: '30vw',
+            borderTopRightRadius: '50%',
+            borderBottomRightRadius: '40%',
+            display: { xs: 'none', md: 'block' }
+          }}
+        />
+      </Box>
+    </Box>
     )
 }
 
