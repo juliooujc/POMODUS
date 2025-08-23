@@ -34,19 +34,19 @@ const LandingPage = () => {
                     paddingTop: { xs: '8vh', md: '10vh' },
                     display: 'flex',
                     flexDirection: { xs: 'column', md: 'row' },
+                    justifyContent:'space-between',
+                    gap:1,
                     minHeight: '100vh'
                 }}
             >
                 <BackgroundWithShape />
                 {/* Área branca - logo + textos */}
                 <Stack
-                    spacing={2}
                     sx={{
                         flex: 1,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        textAlign: 'center',
-                        ml: { xs: 9, md: 15 }
+                        textAlign: 'center'
                     }}
                 >
                     {/* Logo */}
@@ -72,13 +72,12 @@ const LandingPage = () => {
 
                 {/* Área vermelha - texto + botões */}
                 <Stack
-                    spacing={6}
+                    spacing={4}
                     sx={{
                         flex: 1,
                         justifyContent: 'center',
                         alignItems: 'center',
-                        textAlign: 'center',
-                        ml: { xs: 9, md: 50 }
+                        textAlign: 'center'
                     }}
                 >
                     {/* Texto de descrição */}

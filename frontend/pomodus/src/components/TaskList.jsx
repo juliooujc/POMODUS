@@ -19,8 +19,9 @@ import TaskItem from "./TaskItem";
 
 const TaskList = () => {
     const [tab, setTab] = useState(0);
+    const [editingTaskId, setEditingTaskId] = useState(null);
 
-    //provisório
+    // Estado das tarefas
     const [tasks, setTasks] = useState([
         {
             id: 1,
@@ -28,7 +29,7 @@ const TaskList = () => {
             obs: "blabla",
             checked: true,
             tag: "Faculdade",
-            progresso: 0,
+            progress: 0,
             total: 4,
             status: "InProgress"
         },
@@ -38,7 +39,7 @@ const TaskList = () => {
             obs: "blabla",
             checked: false,
             tag: "Casa",
-            progresso: 0,
+            progress: 0,
             total: 4,
             status: "ToDo"
         }
@@ -105,6 +106,8 @@ const TaskList = () => {
                                 )
                             );
                         }}
+                        isEditing={editingTaskId === task.id}
+                        onEditToggle={setEditingTaskId}
                     />
                 ))}
             </Box>
@@ -117,6 +120,20 @@ const TaskList = () => {
                     borderRadius: 2, 
                     textTransform: "none",
                     bgcolor:"tertiary.main"
+                }}
+                onClick={() => {
+                    const newTask = {
+                        id: Date.now(),
+                        titulo: "",
+                        obs: "",
+                        checked: false,
+                        tag: "Faculdade",
+                        progress: 0,
+                        total: 1,
+                        status: "ToDo"
+                    };
+                    setTasks((prev) => [...prev, newTask]);
+                    setEditingTaskId(newTask.id);
                 }}
             >
                 <AddIcon/>Nova Tarefa

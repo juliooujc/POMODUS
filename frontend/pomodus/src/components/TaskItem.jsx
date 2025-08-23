@@ -11,12 +11,7 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { useState } from "react";
-
-const TaskItem = ({ task, onToggle }) => {
-
-    const [isEditing, setIsEditing] = useState(false)
-
+const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
     const tagColors = {
         Faculdade: "rgba(61, 122, 255, 1)",
         Trabalho: "rgba(238, 156, 89, 1)",
@@ -63,13 +58,13 @@ const TaskItem = ({ task, onToggle }) => {
                             defaultValue={task.progress}
                             sx={{ width: 100 }}
                         />
-                        {/* Categorias (MultiSelect) */}
                         {/* Categoria */}
                         <TextField
                             select
                             size="small"
                             label="Categoria"
                             sx={{ minWidth: 150 }}
+                            defaultValue={task.tag}
                         >
                             {Object.keys(tagColors).map((tag) => (
                                 <option key={tag} value={tag}>
@@ -89,7 +84,7 @@ const TaskItem = ({ task, onToggle }) => {
                                 variant="body2"
                                 color="tertiary"
                                 sx={{ cursor: "pointer" }}
-                                onClick={() => setIsEditing(false)}
+                                onClick={() => onEditToggle(null)}
                             >
                                 Cancelar
                             </Typography>
@@ -103,9 +98,7 @@ const TaskItem = ({ task, onToggle }) => {
                                     borderRadius: 1,
                                     cursor: "pointer"
                                 }}
-                                onClick={() => {
-                                    setIsEditing(false)
-                                }}
+                                onClick={() => onEditToggle(null)}
                             >
                                 Salvar
                             </Typography>
@@ -145,12 +138,12 @@ const TaskItem = ({ task, onToggle }) => {
                 {/* Chip e contador */}
                 <Box display="flex" alignItems="center" gap={1} flexWrap="wrap">
                     <Chip label={task.tag} sx={{bgcolor: tagColors[task.tag], color:'white'}} size="small" />
-                <Typography variant="body2">
-                    {task.progress}/{task.total}
-                </Typography>
-                <IconButton size="small" onClick={() => setIsEditing(true)}>
-                    <EditIcon fontSize="small" />
-                </IconButton>
+                    <Typography variant="body2">
+                        {task.progress}/{task.total}
+                    </Typography>
+                    <IconButton size="small" onClick={() => onEditToggle(task.id)}>
+                        <EditIcon fontSize="small" />
+                    </IconButton>
                 </Box>
             </Box>
 

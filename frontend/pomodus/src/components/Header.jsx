@@ -1,4 +1,4 @@
-import { Paper, Typography, Button} from '@mui/material'
+import { Paper, Typography, Button, Stack} from '@mui/material'
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
@@ -27,16 +27,16 @@ const Header = () => {
         top:0,
         gap: 'auto'
       }}>
-
-      <Typography variant="h3" color="white" 
-        sx={{ 
-          fontSize: { xs: '1.2rem', md: '1.4rem'},
-          fontFamily: 'cursive',
-          ml: 3
-        }}>
-        Pomodus
-      </Typography>
-
+      <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" sx={{ml:{xs:1, md:3}}}>
+        <img src="/interface/logo.svg" alt="logo" style={{ width: '40px', height: 'auto' }} />
+        <Typography variant="h3" color="white"
+          sx={{
+            fontSize: { xs: '1rem', md: '1.2rem' },
+            fontFamily: 'cursive',
+          }}>
+          Pomodus
+        </Typography>
+      </Stack>
       <Button variant='contained' sx={{ mr:3 }} onClick={handleHome}>
         Sair
       </Button>

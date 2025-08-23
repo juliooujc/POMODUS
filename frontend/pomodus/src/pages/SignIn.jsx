@@ -24,10 +24,10 @@ const Login = () => {
       {/* Tela de fundo Vermelha */}
       <Box sx={{
         position: 'absolute', // Faz a Box ignorar o fluxo normal da página
-        top: 0,               // Garante que ela comece no topo
-        left: 0,
-        width: '100vw',
-        height: '100vh',
+        m:0,
+        p:0,
+        width: '100%',
+        minHeight: '100vh',
         backgroundColor: 'primary.main',
         display: 'flex',
         alignItems: 'center',
@@ -41,7 +41,7 @@ const Login = () => {
           maxWidth: '500px',
           height: 'auto',
           padding: { xs: 3, md: 5 },
-
+          margin: { xs: 2, md: 15 }
         }}>
           {/* Grid de login */}
           <Grid container spacing={3} direction="column">

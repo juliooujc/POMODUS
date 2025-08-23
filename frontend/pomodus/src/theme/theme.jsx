@@ -10,7 +10,7 @@ const theme = createTheme({
       main: '#D9D9D9', // branco
     },
     tertiary:{
-      main:  '#2196F3' // azul
+      main:  '#D32F2F' // vermelho forte
     },
     quartiary:{
       main : '#ffcdd2' // vermelho claro

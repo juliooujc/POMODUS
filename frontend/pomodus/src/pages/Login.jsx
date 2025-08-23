@@ -17,8 +17,8 @@ const Login = () => {
         position: 'absolute', // Faz a Box ignorar o fluxo normal da página
         top: 0,               // Garante que ela comece no topo
         left: 0,
-        width: '100vw',
-        height: '100vh',
+        width: '100%',
+        height: '100%',
         backgroundColor: 'primary.main',
         display: 'flex',
         alignItems: 'center',
@@ -27,12 +27,12 @@ const Login = () => {
 
 
         {/* Bloco para login */}
-        <Paper elevation={12} sx={{
+        <Paper sx={{
           width: { xs: '90%', sm: '70%', md: '50%' },
           maxWidth: '500px',
           height: 'auto',
           padding: { xs: 3, md: 5 },
-
+          margin:{ xs: 2, md: 15}
         }}>
           {/* Grid de login */}
           <Grid container spacing={3} direction="column">
