@@ -11,7 +11,23 @@ const Timer = () => {
         pausaLonga : "#58A6F0"
     };
 
-    const [modo, setModo] = useState('pausaLonga'); //modificar aqui o modo
+    const HandlePomodoro = () => {
+        // adicionar logica pomodoro
+        setModo('pomodoro');
+
+    };
+
+    const handlePausaCurta = () => {
+        // adicionar logica pausa curta
+        setModo('pausaCurta');
+    };
+
+    const handlePausaLonga = () => {
+        // adicionar logica pausa longa
+        setModo('pausaLonga');
+    };
+
+    const [modo, setModo] = useState('pomodoro'); //modificar aqui o modo
 
     return (
         <Box p={2} sx={{
@@ -33,7 +49,7 @@ const Timer = () => {
                 alignItems:'center',
                 gap: 2
             }}>
-                <Button variant="text" selsize="small" ect sx={{
+                <Button variant="text" selsize="small" onClick={HandlePomodoro} sx={{
                     textTransform:'capitalize',
                     color:(modo==='pomodoro')? bgColors[modo]:'white',
                     bgcolor: (modo==='pomodoro')? 'white': bgColors[modo],
@@ -42,7 +58,7 @@ const Timer = () => {
                         color: bgColors[modo]
                     }
                 }}>Pomodoro</Button>
-                <Button variant="text" size="small" sx={{
+                <Button variant="text" size="small" onClick={handlePausaCurta} sx={{
                     textTransform:'capitalize',
                     color:(modo==='pausaCurta')? bgColors[modo]:'white',
                     bgcolor: (modo==='pausaCurta')? 'white': bgColors[modo],
@@ -51,7 +67,7 @@ const Timer = () => {
                         color: bgColors[modo]
                     }
                 }}>Pausa Curta</Button>
-                <Button variant="text" size="small" sx={{
+                <Button variant="text" size="small" onClick={handlePausaLonga} sx={{
                     textTransform:'capitalize',
                     color:(modo==='pausaLonga')? bgColors[modo]:'white',
                     bgcolor: (modo==='pausaLonga')? 'white': bgColors[modo],

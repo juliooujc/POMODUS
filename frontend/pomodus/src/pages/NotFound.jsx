@@ -41,7 +41,7 @@ const NotFound = () => {
                         {/* Logo + Nome */}
                         <Grid size={12}>
                             <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
-                                <img src="interface/logo.svg" alt="logo" style={{ width: '40px', height: 'auto' }} />
+                                <img src="/interface/logo.svg" alt="logo" style={{ width: '40px', height: 'auto' }} />
                                 <Typography variant="h3" color="black"
                                     sx={{
                                         fontSize: { xs: '1.2rem', md: '1.4rem' },
