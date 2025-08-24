@@ -12,18 +12,18 @@ const Timer = () => {
     };
 
     const HandlePomodoro = () => {
-        // adicionar logica pomodoro
+        // adicionar logica pomodoro -> exemplo: adicionar +1 no ciclo da tarefa
         setModo('pomodoro');
 
     };
 
     const handlePausaCurta = () => {
-        // adicionar logica pausa curta
+        // adicionar logica pausa curta -> exemplo: adicionar +1 no ciclo da tarefa
         setModo('pausaCurta');
     };
 
     const handlePausaLonga = () => {
-        // adicionar logica pausa longa
+        // adicionar logica pausa longa -> exemplo: adicionar +1 no ciclo da tarefa
         setModo('pausaLonga');
     };
 

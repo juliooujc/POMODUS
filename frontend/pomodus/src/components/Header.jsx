@@ -55,7 +55,7 @@ const Header = () => {
           />
           <Typography
             variant="h3"
-            color="white"
+            color="white.basic"
             sx={{
               fontSize: { xs: '1rem', md: '1.2rem' },
               fontFamily: 'cursive',
@@ -105,7 +105,7 @@ const Header = () => {
         {/* Ícones à direita */}
         <Stack sx={{ display: 'flex', flexDirection: 'row' }}>
           <IconButton
-            sx={{ mr: 1, color: 'white' }}
+            sx={{ mr: 1, color: 'white.basic' }}
             onClick={handleConfig}
           >
             <SettingsIcon />

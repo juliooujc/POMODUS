@@ -1,5 +1,6 @@
 // theme.jsx
 import { createTheme } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
 
 const theme = createTheme({
   palette: {
@@ -14,6 +15,19 @@ const theme = createTheme({
     },
     quartiary:{
       main : '#ffcdd2' // vermelho claro
+    },
+    white: {
+      basic: '#ffffffff', // branco puro
+      off: '#F2F0EF' // off-white 
+    },
+    green:{
+      pastel: '#90FF80'
+    },
+    red: {
+      pastel: '#FF8082'
+    },
+    yellow: {
+      pastel: '#FFDB80'
     }
   },
 });

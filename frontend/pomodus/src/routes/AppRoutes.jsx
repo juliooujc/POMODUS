@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import SignIn from '../pages/SignIn';
 import NotFound from '../pages/NotFound';
+import Statistics from '../pages/Statistics';
 
 const AppRoutes = () => (
     <Routes>
@@ -13,6 +14,7 @@ const AppRoutes = () => (
         <Route path="/login" element={<Login />} />
         <Route path='/signin' element={<SignIn />}/>
         <Route path="*" element={<NotFound />}/> 
+        <Route path='/estatisticas' element={<Statistics />}/>
     </Routes>
 );
 
