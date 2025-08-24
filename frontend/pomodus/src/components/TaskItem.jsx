@@ -92,7 +92,7 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                                 variant="body2"
                                 sx={{
                                     bgcolor: "tertiary.main",
-                                    color: "white",
+                                    color: "white.basic",
                                     px: 2,
                                     py: 0.5,
                                     borderRadius: 1,
@@ -116,7 +116,7 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                 p: 2,
                 mb: 2,
                 borderRadius: 2,
-                backgroundColor: task.checked ? "quartiary.main" : "#eeeeee"
+                backgroundColor: task.checked ? "white.off" : "white.basic"
             }}
         >
             <Box display="flex" alignItems="center" justifyContent="space-between" sx={{color:'text.secondary', gap:2}} >
@@ -137,7 +137,7 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
 
                 {/* Chip e contador */}
                 <Box display="flex" alignItems="center" gap={1} flexWrap="wrap">
-                    <Chip label={task.tag} sx={{bgcolor: tagColors[task.tag], color:'white'}} size="small" />
+                    <Chip label={task.tag} sx={{bgcolor: tagColors[task.tag], color:'white.basic'}} size="small" />
                     <Typography variant="body2">
                         {task.progress}/{task.total}
                     </Typography>

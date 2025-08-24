@@ -70,7 +70,7 @@ const TaskList = () => {
         );
 
     return (
-        <Box p={2} sx={{minWidth:{ md:'90vh', xs: '40vh'}, bgcolor:'white', borderRadius:2}} >
+        <Box p={2} sx={{minWidth:{ md:'90vh', xs: '40vh'}, bgcolor:'white.basic', borderRadius:2}} >
             
             {/* Tabs + botão filtro */}
             <Box display="flex" alignItems="center" justifyContent="space-between" sx={{borderBottom: '1px solid', borderColor: '#bebebeff'}}>

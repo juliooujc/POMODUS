@@ -51,39 +51,39 @@ const Timer = () => {
             }}>
                 <Button variant="text" selsize="small" onClick={HandlePomodoro} sx={{
                     textTransform:'capitalize',
-                    color:(modo==='pomodoro')? bgColors[modo]:'white',
-                    bgcolor: (modo==='pomodoro')? 'white': bgColors[modo],
+                    color:(modo==='pomodoro')? bgColors[modo]:'white.basic',
+                    bgcolor: (modo==='pomodoro')? 'white.basic': bgColors[modo],
                     "&:active": {
-                        bgcolor: "white",
+                        bgcolor: "white.basic",
                         color: bgColors[modo]
                     }
                 }}>Pomodoro</Button>
                 <Button variant="text" size="small" onClick={handlePausaCurta} sx={{
                     textTransform:'capitalize',
-                    color:(modo==='pausaCurta')? bgColors[modo]:'white',
-                    bgcolor: (modo==='pausaCurta')? 'white': bgColors[modo],
+                    color:(modo==='pausaCurta')? bgColors[modo]:'white.basic',
+                    bgcolor: (modo==='pausaCurta')? 'white.basic': bgColors[modo],
                     "&:active": {
-                        bgcolor: "white",
+                        bgcolor: "white.basic",
                         color: bgColors[modo]
                     }
                 }}>Pausa Curta</Button>
                 <Button variant="text" size="small" onClick={handlePausaLonga} sx={{
                     textTransform:'capitalize',
-                    color:(modo==='pausaLonga')? bgColors[modo]:'white',
-                    bgcolor: (modo==='pausaLonga')? 'white': bgColors[modo],
+                    color:(modo==='pausaLonga')? bgColors[modo]:'white.basic',
+                    bgcolor: (modo==='pausaLonga')? 'white.basic': bgColors[modo],
                     "&:active": {
-                        bgcolor: "white",
+                        bgcolor: "white.basic",
                         color: bgColors[modo]
                     }
                 }}>Pausa Longa</Button>
             </Box>
             {/* Titulo e Time */}
             <Typography variant="body1" sx={{
-                color:'white',
+                color:'white.basic',
                 fontWeight:'bold'
             }}>Tarefa Título</Typography>{/* modificar titulo aqui */}
             <Typography variant="h2" sx={{
-                color:'white',
+                color:'white.basic',
                 fontWeight:'bold',
                 fontFamily: 'cursive',
                 fontSize:'12vh'
@@ -99,7 +99,7 @@ const Timer = () => {
                     borderRadius: 5,
                     backgroundColor: 'rgba(255,255,255,0.3)',
                     '& .MuiLinearProgress-bar': {
-                    backgroundColor: 'white',
+                    backgroundColor: 'white.basic',
                     }
                 }} 
             />
@@ -112,13 +112,13 @@ const Timer = () => {
                 gap: 2
             }}>
                 <IconButton>
-                    <ReplayIcon sx={{color:'white'}} />
+                    <ReplayIcon sx={{color:'white.basic'}} />
                 </IconButton>
-                <Button variant="contained" sx={{bgcolor:'tertiary.main', color:'white'}}>
+                <Button variant="contained" sx={{bgcolor:'tertiary.main', color:'white.basic'}}>
                     Iniciar
                 </Button>
                 <IconButton>
-                    <SkipNextIcon  sx={{color:'white'}}/>
+                    <SkipNextIcon  sx={{color:'white.basic'}}/>
                 </IconButton>
             </Box>
         </Box>
