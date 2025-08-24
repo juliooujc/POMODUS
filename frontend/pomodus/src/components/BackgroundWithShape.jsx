@@ -1,12 +1,12 @@
 // backgroundwithshape.jsx
 import { Box } from '@mui/material';
 
-const BackgroundWithShape = () => {
+const BackgroundWithShape = ({ showTopSpace }) => {
     return (
         // quadrado vermelho
         <Box sx={{
             position: 'absolute',
-            top: {xs:'8vh', md:'10vh'},
+            top: showTopSpace ? {xs:'8vh', md:'10vh'} : 0,
             left: 0,
             zIndex: -1,
             backgroundColor: {md:'primary.main', xs:'secondary.main'}, 
