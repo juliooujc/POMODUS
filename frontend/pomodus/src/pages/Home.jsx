@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <Header />
       <Box sx={{
-        padding: { xs:1, md:5 },
+        padding: { xs:1, md:8 },
         paddingTop: { xs: '9vh', md: '12vh' },
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },

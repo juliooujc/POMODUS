@@ -11,19 +11,20 @@ const Timer = () => {
         pausaLonga : "#58A6F0"
     };
 
-    const [modo, setModo] = useState('pomodoro');
+    const [modo, setModo] = useState('pausaLonga'); //modificar aqui o modo
 
     return (
         <Box p={2} sx={{
-            minWidth:{ md:'80vh', xs: '30vh'}, 
+            minWidth:{ md:'70vh', xs: '30vh'}, 
             bgcolor: bgColors[modo], 
             borderRadius:4,
-            marginTop:{ xs:1, md:8 },
+            marginTop:{ xs:1, md:6 },
             display:'flex',
             flexDirection:'column',
             alignItems: 'center',
             gap:3,
             padding:4,
+            height:{md:'50vh', xs:'45vh'}
         }}>
             {/* Botões de modo */}
             <Box sx={{
@@ -32,7 +33,7 @@ const Timer = () => {
                 alignItems:'center',
                 gap: 2
             }}>
-                <Button variant="text" select sx={{
+                <Button variant="text" selsize="small" ect sx={{
                     textTransform:'capitalize',
                     color:(modo==='pomodoro')? bgColors[modo]:'white',
                     bgcolor: (modo==='pomodoro')? 'white': bgColors[modo],
@@ -41,7 +42,7 @@ const Timer = () => {
                         color: bgColors[modo]
                     }
                 }}>Pomodoro</Button>
-                <Button variant="text" sx={{
+                <Button variant="text" size="small" sx={{
                     textTransform:'capitalize',
                     color:(modo==='pausaCurta')? bgColors[modo]:'white',
                     bgcolor: (modo==='pausaCurta')? 'white': bgColors[modo],
@@ -50,7 +51,7 @@ const Timer = () => {
                         color: bgColors[modo]
                     }
                 }}>Pausa Curta</Button>
-                <Button variant="text" sx={{
+                <Button variant="text" size="small" sx={{
                     textTransform:'capitalize',
                     color:(modo==='pausaLonga')? bgColors[modo]:'white',
                     bgcolor: (modo==='pausaLonga')? 'white': bgColors[modo],
@@ -63,22 +64,22 @@ const Timer = () => {
             {/* Titulo e Time */}
             <Typography variant="body1" sx={{
                 color:'white',
-                fontWeight:'bold',
-                fontSize: '18px'
-            }}>Tarefa Título</Typography>
-            <Typography variant="h1" sx={{
+                fontWeight:'bold'
+            }}>Tarefa Título</Typography>{/* modificar titulo aqui */}
+            <Typography variant="h2" sx={{
                 color:'white',
                 fontWeight:'bold',
                 fontFamily: 'cursive',
-            }}>25:00</Typography>
+                fontSize:'12vh'
+            }}>25:00</Typography>{/* modificar variavel aqui*/}
 
             {/* Barra de progresso */}
             <LinearProgress 
                 variant="determinate" 
-                value={50} 
+                value={50} // modificar aqui
                 sx={{
                     width: '60%',
-                    height: 8,
+                    height: 6,
                     borderRadius: 5,
                     backgroundColor: 'rgba(255,255,255,0.3)',
                     '& .MuiLinearProgress-bar': {
@@ -95,7 +96,7 @@ const Timer = () => {
                 gap: 2
             }}>
                 <IconButton>
-                    <ReplayIcon sx={{color:'white'}}/>
+                    <ReplayIcon sx={{color:'white'}} />
                 </IconButton>
                 <Button variant="contained" sx={{bgcolor:'tertiary.main', color:'white'}}>
                     Iniciar
