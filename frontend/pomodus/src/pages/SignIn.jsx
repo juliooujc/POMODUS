@@ -68,7 +68,7 @@ const Login = () => {
             {/* Formulario: Nome + Email + senha + checkbox salvar usuário no localstorage*/}
             <Grid size={12}>
               <Stack spacing={2} component="form" onSubmit={() => { alert("oi") }}>
-                <TextField required id='nome' label='Nome' type="text" variant="outlined" fullWidth value={name} onChange={(e) => setName(e.target.value)} />
+                <TextField required id='nome' label='Nome' type="text" variant="outlined" fullWidth value={nome} onChange={(e) => setNome(e.target.value)} />
                 <TextField required id='email' label='Email' type="email" variant="outlined" fullWidth value={email} onChange={(e) => setEmail(e.target.value)} />
                 <TextField required id='senha' label="Senha" type="password" variant="outlined" fullWidth value={password} onChange={(e) => setPassword(e.target.value)} />
                 <FormControlLabel control={<Checkbox />} label="Aceito os termos e condições de uso" />
