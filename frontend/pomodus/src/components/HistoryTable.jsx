@@ -1,17 +1,54 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-import { Paper } from '@mui/material';
+import { Paper, Typography, Box } from '@mui/material';
 
-// exemplo de tabela enfim so pra ficar de exemplo ai de oq nois precisa
+// deixei dados mockados aqui
+// nao consegui centralizar a tabela, mas fiz o possivel pra deixar bonitinha
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'data', headerName: 'Data', width: 150 },
-  { field: 'atividade', headerName: 'Atividade', width: 130 },
-  { field: 'horasGastas', headerName: 'Horas Gastas', width: 140 },
-  { field: 'status', headerName: 'Status', width: 130 },
-  { field: 'categoria', headerName: 'Categoria', width: 130 },
+  {
+    field: 'id',
+    headerName:
+      'ID',
+    width: 80,
+    renderHeader: () => <Typography variant="body1" color="darkGreen">📂 ID</Typography>
+  },
+
+  {
+    field: 'data',
+    headerName: 'Data',
+    width: 150,
+    renderHeader: () => <Typography variant="body1" color="darkGreen">📅 Data</Typography>
+  },
+
+  {
+    field: 'atividade',
+    headerName: 'Atividade',
+    width: 150,
+    renderHeader: () => <Typography variant="body1" color="darkGreen">🏢 Atividades</Typography>
+  },
+
+  {
+    field: 'horasGastas',
+    headerName: 'Horas Gastas',
+    width: 150,
+    renderHeader: () => <Typography variant="body1" color="darkGreen">🕗 Horas Gastas</Typography>
+  },
+
+  {
+    field: 'status',
+    headerName: 'Status',
+    width: 150,
+    renderHeader: () => <Typography variant="body1" color="darkGreen">📊 Status</Typography>
+  },
+
+  {
+    field: 'categoria',
+    headerName: 'Categoria',
+    width: 150,
+    renderHeader: () => <Typography variant="body1" color="darkGreen">📂 Categoria</Typography>
+  },
 
 ];
 
@@ -33,14 +70,21 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 export default function DataTable() {
   return (
-    <Paper sx={{ height: '100%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+    <Paper
+      elevation={3}
+      sx={{
+        p: 2,
+        overflow: 'hidden',
+        maxWidth: '100%',
+      }}
+    >
       <DataGrid
-        rows={rows} // linhas
-        columns={columns} // colunas
+        rows={rows}
+        columns={columns}
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[5, 10]}
-        sx={{ border: 0 }}
       />
     </Paper>
+
   );
 }                                                         

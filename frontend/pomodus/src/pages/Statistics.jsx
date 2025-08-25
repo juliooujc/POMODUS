@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Grid, Stack, Typography, Icon } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import Header from '../components/Header';
 import UsageChart from '../components/UsageChart';
 import HistoryTable from '../components/HistoryTable';
@@ -108,7 +108,7 @@ const Statistics = () => {
                     </Grid>
 
                     {/* Grid para tabela de histórico */}
-                    <Grid size={12} alignItems="center" justifyContent="center">
+                    <Grid size={12}>
                         <HistoryTable />
                     </Grid>
 
