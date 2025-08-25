@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { Box, Grid, Stack, Typography, Icon } from '@mui/material';
 import Header from '../components/Header';
+import UsageChart from '../components/UsageChart';
 
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import FastForwardOutlinedIcon from '@mui/icons-material/FastForwardOutlined';
 import AccessAlarmOutlinedIcon from '@mui/icons-material/AccessAlarmOutlined';
+import CategoryChart from '../components/CategoryChart';
+
+{/* Talvez eu quebre em elementos */ }
 
 const Statistics = () => {
     // os estados responsaveis pela exibição das informação dos box coloridos
@@ -81,7 +85,10 @@ const Statistics = () => {
 
                     {/* Grid para gráfico de barra + grafico pizza */}
                     <Grid size={12}>
-
+                        <Stack direction={'row'} spacing={12} justifyContent="center">
+                            <UsageChart chartHeight={300} />
+                            <CategoryChart chartHeight={300} />
+                        </Stack>
                     </Grid>
 
 
@@ -101,7 +108,7 @@ const Statistics = () => {
 
                     {/* Grid para tabela de histórico */}
                     <Grid size={12}>
-                        
+
                     </Grid>
 
                 </Grid>

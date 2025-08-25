@@ -1,0 +1,82 @@
+import { useState } from 'react'
+import { BarChart } from '@mui/x-charts/BarChart';
+import { Box, Stack, Button } from '@mui/material';
+
+
+// prop pra alterar o tamanho dele
+const UsageChart = ({ chartHeight }) => {
+
+    // dados do grafico eixo x e eixo y
+    const [dataY, setDataY] = useState([]);
+    const [dataX, setDataX] = useState([]);
+
+    // efeito de botao selecionado
+    const [selecionado, setSelecionado] = useState('semana');
+
+    // dado mockado!!
+    const handleNessaSemana = () => {
+        const diasSemana = [
+            'segunda-feira', 'terça-feira', 'quarta-feira',
+            'quinta-feira', 'sexta-feira', 'sábado', 'domingo'
+        ];
+        const dadoMockado = diasSemana.map(() =>
+            Math.floor(Math.random() * 10)
+        );
+
+        setDataX(diasSemana);
+        setDataY(dadoMockado);
+        setSelecionado('semana');
+    };
+
+    // dado mockado!!
+    const handleNesseMes = () => {
+        const diasMes = Array.from({ length: 31 }, (_, i) => i + 1); // dias 1 a 31
+        const dadoMockado = diasMes.map(() =>
+            Math.floor(Math.random() * 10)
+        );
+
+        setDataX(diasMes);
+        setDataY(dadoMockado);
+        setSelecionado('mes');
+    };
+
+    return (
+        <Box backgroundColor={'white.basic'} padding={5} borderRadius={16}>
+            <Stack spacing={3} direction={'row'} justifyContent="flex-end" width="100%">
+                <Button variant="text" onClick={handleNessaSemana} sx={{
+                    backgroundColor: selecionado === 'semana' ? "darkGreen.main" : 'transparent',
+                    color: selecionado === 'semana' ? 'white.basic' : 'darkGreen.main',
+                }}>
+                    Nessa semana
+                </Button>
+                <Button variant="text" onClick={handleNesseMes} sx={{
+                    backgroundColor: selecionado === 'mes' ? "darkGreen.main" : 'transparent',
+                    color: selecionado === 'mes' ? 'white.basic' : 'darkGreen.main',
+                }}>
+                    Nesse mês
+                </Button>
+
+            </Stack>
+            <BarChart
+                height={chartHeight} // apenas height é preciso, width automaticamente ocupa 100% do componente
+                
+                xAxis={[{
+                    id: 'dias da semana',
+                    label: 'dias da semana',
+                    data: dataX,
+                    scaleType: 'band', // garante espaçamento uniforme entre a label embaixo
+                },]}
+                series={[{
+                    label: 'Horas trabalhadas',
+                    data: dataY,
+                    color: 'darkGreen'
+                },]}
+
+                // TO DO: usar slotprops pra alterar a fonte
+            />
+        </Box>
+
+    )
+}
+
+export default UsageChart

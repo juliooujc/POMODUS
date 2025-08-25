@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import SignIn from '../pages/SignIn';
 import NotFound from '../pages/NotFound';
 import Statistics from '../pages/Statistics';
+import Debug from '../pages/Debug.jsx';
 
 const AppRoutes = () => (
     <Routes>
@@ -15,6 +16,7 @@ const AppRoutes = () => (
         <Route path='/signin' element={<SignIn />}/>
         <Route path="*" element={<NotFound />}/> 
         <Route path='/estatisticas' element={<Statistics />}/>
+        <Route path='/debuga' element={<Debug />}/>
     </Routes>
 );
 

@@ -21,7 +21,10 @@ const theme = createTheme({
       off: '#F2F0EF' // off-white 
     },
     green:{
-      pastel: '#90FF80'
+      pastel: '#90FF80',
+    },
+    darkGreen: {
+      main: '#438353'
     },
     red: {
       pastel: '#FF8082'
