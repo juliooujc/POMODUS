@@ -81,7 +81,8 @@ const LandingPage = () => {
                 <Typography variant="body1"
                     sx={{
                         fontSize: { xs: '1rem', md: '1.2rem' },
-                        color: { md: 'white', xs: 'text.primary' }
+                        color: { md: 'white.basic', xs: 'black' },
+                        fontFamily: 'cursive'
                     }}
                 >
                     Transforme minutos em conquistas: <br />

@@ -2,9 +2,10 @@ import { Paper, Typography, Button, Stack, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import AnalyticsIcon from '@mui/icons-material/Analytics';
-import SettingsIcon from '@mui/icons-material/Settings';
+import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
+import TuneIcon from '@mui/icons-material/Tune';
 import AvTimerIcon from '@mui/icons-material/AvTimer';
+
 import ConfigPopup from './ConfigPopup';
 
 const Header = () => {
@@ -15,8 +16,13 @@ const Header = () => {
     navigate("/login");
   };
 
-    const handleHome = () => {
-    navigate("/pages/home");
+    const handleEstatisticas = () => {
+    navigate("/estatisticas");
+  };
+
+  const handleHome = () => {
+    navigate('/pages/home');
+
   };
 
 
@@ -98,9 +104,9 @@ const Header = () => {
               gap: 1,
               textTransform: 'capitalize',
             }}
-            onClick={handleHome}
+            onClick={handleEstatisticas}
           >
-            <AnalyticsIcon />
+            <StackedBarChartIcon />
             <Typography sx={{ display: { xs: 'none', sm: 'inline' } }}>
               Painel de Estatísticas
             </Typography>
@@ -114,7 +120,7 @@ const Header = () => {
             sx={{ mr: 1, color: 'white.basic' }}
             onClick={handleConfig}
           >
-            <SettingsIcon />
+            <TuneIcon />
           </IconButton>
           <Button
             variant="contained"

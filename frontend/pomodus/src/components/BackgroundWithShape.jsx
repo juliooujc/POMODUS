@@ -17,7 +17,7 @@ const BackgroundWithShape = ({ showTopSpace }) => {
 
         {/* Quadrado branco - escondido no XS */}
         <Box sx={{
-            backgroundColor: 'secondary.main',
+            backgroundColor: 'white.basic',
             width: '35vw',
             height: '100vh',
             display: { xs: 'none', md: 'block' }
@@ -27,7 +27,7 @@ const BackgroundWithShape = ({ showTopSpace }) => {
         <Box
           sx={{
             position: 'absolute',
-            backgroundColor: 'secondary.main',
+            backgroundColor: 'white.basic',
             width: '20vw',
             height: '100vh',
             marginLeft: '30vw',
