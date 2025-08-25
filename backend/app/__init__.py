@@ -18,11 +18,11 @@ def create_app():
     
     # Registrar blueprints
     from app.routes.users import users_bp
-    from app.routes.products import products_bp
+    from app.routes.main import bp as main_bp
     from app.routes.tasks import tasks_bp
-    
+
+    app.register_blueprint(main_bp)
     app.register_blueprint(users_bp, url_prefix='/api/users')
-    app.register_blueprint(products_bp, url_prefix='/api/products')
     app.register_blueprint(tasks_bp, url_prefix='/api/tasks')
     
     return app

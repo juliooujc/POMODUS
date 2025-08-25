@@ -1,5 +1,7 @@
 import os
 import sys
+from app import create_app
+from app.utils.json_db import init_json_db
 
 # Adicionar o diretório app ao PATH
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'app'))
@@ -25,8 +27,6 @@ def health():
     return {'status': 'healthy', 'database': 'json'}
 
 if __name__ == '__main__':
-    # Criar pasta data se não existir
-    if not os.path.exists('data'):
-        os.makedirs('data')
-    
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    print("🚀 Servidor iniciado em http://127.0.0.1:5000")
+    print("📁 Banco de dados: data/database.json")
+    app.run(debug=True)

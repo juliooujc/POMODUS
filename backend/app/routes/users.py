@@ -3,15 +3,7 @@ from app.utils.json_db import db
 
 users_bp = Blueprint('users', __name__)
 
-# Rota para listar e criar usuários
-@users_bp.route('/', methods=['GET', 'POST'])
-@users_bp.route('', methods=['GET', 'POST'])  # Sem barra
-def handle_users():
-    if request.method == 'GET':
-        return get_users()
-    elif request.method == 'POST':
-        return create_user()
-
+@users_bp.route('/', methods=['GET'])
 def get_users():
     try:
         users = db.get_collection('users')
@@ -19,6 +11,7 @@ def get_users():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@users_bp.route('/', methods=['POST'])
 def create_user():
     try:
         data = request.get_json()
@@ -26,7 +19,6 @@ def create_user():
         if not data or 'name' not in data or 'email' not in data:
             return jsonify({'error': 'Nome e email são obrigatórios'}), 400
         
-        # Verificar se email já existe
         existing_users = db.get_collection('users')
         if any(user.get('email') == data['email'] for user in existing_users):
             return jsonify({'error': 'Email já cadastrado'}), 400
@@ -34,7 +26,8 @@ def create_user():
         user_data = {
             'name': data['name'],
             'email': data['email'],
-            'age': data.get('age')
+            'age': data.get('age'),
+            'password': data.get('password', '')  # Em produção, isso deve ser hash!
         }
         
         created_user = db.add_item('users', user_data)
@@ -43,17 +36,7 @@ def create_user():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-# Rota para usuário específico (GET, PUT, DELETE)
-@users_bp.route('/<string:user_id>/', methods=['GET', 'PUT', 'DELETE'])
-@users_bp.route('/<string:user_id>', methods=['GET', 'PUT', 'DELETE'])  # Sem barra
-def handle_user(user_id):
-    if request.method == 'GET':
-        return get_user(user_id)
-    elif request.method == 'PUT':
-        return update_user(user_id)
-    elif request.method == 'DELETE':
-        return delete_user(user_id)
-
+@users_bp.route('/<string:user_id>', methods=['GET'])
 def get_user(user_id):
     try:
         user = db.get_item('users', user_id)
@@ -63,6 +46,7 @@ def get_user(user_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@users_bp.route('/<string:user_id>', methods=['PUT'])
 def update_user(user_id):
     try:
         data = request.get_json()
@@ -77,6 +61,10 @@ def update_user(user_id):
             if any(u.get('email') == data['email'] for u in existing_users if u.get('id') != user_id):
                 return jsonify({'error': 'Email já está em uso'}), 400
         
+        # Remover campos protegidos
+        data.pop('id', None)
+        data.pop('created_at', None)
+        
         updated_user = db.update_item('users', user_id, data)
         if not updated_user:
             return jsonify({'error': 'Erro ao atualizar usuário'}), 500
@@ -86,6 +74,7 @@ def update_user(user_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@users_bp.route('/<string:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     try:
         if not db.delete_item('users', user_id):
