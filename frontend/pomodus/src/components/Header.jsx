@@ -11,9 +11,14 @@ const Header = () => {
   const navigate = useNavigate();
   const [openConfig, setOpenConfig] = useState(false);
 
-  const handleHome = () => {
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+    const handleHome = () => {
     navigate("/pages/home");
   };
+
 
   const handleConfig = () => {
     setOpenConfig(true);
@@ -59,6 +64,7 @@ const Header = () => {
             sx={{
               fontSize: { xs: '1rem', md: '1.2rem' },
               fontFamily: 'cursive',
+              display: { xs: 'none', sm: 'inline' }
             }}
           >
             Pomodus
@@ -113,7 +119,7 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{ mr: 3, backgroundColor: '#efb8b823', gap: 1 }}
-            onClick={handleHome}
+            onClick={handleLogin}
           >
             Sair
           </Button>

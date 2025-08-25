@@ -1,12 +1,15 @@
 // login.jsx
 import { useState } from 'react'
-import { Box, Paper, Stack, Typography, Grid, TextField, Button, FormControlLabel, Checkbox } from '@mui/material'
+import { Box, Paper, Stack, Typography, Grid, TextField, Button, FormControlLabel, Checkbox, InputAdornment, IconButton } from '@mui/material'
 import Header from '../components/Header'
+
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const Login = () => {
   // Email e senha
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   return (
     <Box>
@@ -60,7 +63,32 @@ const Login = () => {
             <Grid size={12}>
               <Stack spacing={2} component="form" onSubmit={() => { alert("oi") }}>
                 <TextField required id='email' label='Email' type="email" variant="outlined" fullWidth value={email} onChange={(e) => setEmail(e.target.value)} />
-                <TextField required id='senha' label="Senha" type="password" variant="outlined" fullWidth value={password} onChange={(e) => setPassword(e.target.value)} />
+                <TextField
+                  variant="outlined"
+                  id='senha'
+                  fullWidth
+                  label="Senha"
+                  type={mostrarSenha ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  margin="normal"
+                  InputProps={{
+                  endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setMostrarSenha((prev) => !prev)}
+                      edge="end"
+                      aria-label={
+                        mostrarSenha ? "Ocultar senha" : "Mostrar senha"
+                      }
+                    >
+                      {mostrarSenha ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                    )
+                  }}
+                />
                 <FormControlLabel control={<Checkbox />} label="Lembrar de mim" />
                 <Button type="submit" variant="contained" size="large" fullWidth>
                   Entrar

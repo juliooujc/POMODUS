@@ -5,7 +5,11 @@ import {
     TextField,
     Chip,
     IconButton,
-    Paper
+    Paper,
+    FormControl, 
+    Select,
+    MenuItem,
+    InputLabel
 } from "@mui/material";
 
 import EditIcon from '@mui/icons-material/Edit';
@@ -59,19 +63,21 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                             sx={{ width: 100 }}
                         />
                         {/* Categoria */}
-                        <TextField
-                            select
-                            size="small"
-                            label="Categoria"
-                            sx={{ minWidth: 150 }}
-                            defaultValue={task.tag}
-                        >
-                            {Object.keys(tagColors).map((tag) => (
-                                <option key={tag} value={tag}>
-                                    {tag}
-                                </option>
-                            ))}
-                        </TextField>
+                        <FormControl >
+                            <InputLabel>Categoria</InputLabel>
+                            <Select
+                                defaultValue={task.tag}
+                                label="Selecionar Categoria"
+                                size="small"
+                                sx={{ minWidth: 150 }}
+                            >
+                                {Object.keys(tagColors).map((tag) => (
+                                    <MenuItem key={tag} value={tag}>
+                                        {tag}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                     </Box>
 
                     {/* Ações */}

@@ -7,7 +7,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 const Timer = () => {
     const bgColors = {
         pomodoro: "#BA4949",
-        pausaCurta: "#79da6aff",
+        pausaCurta: "#73c765ff",
         pausaLonga : "#58A6F0"
     };
 
@@ -34,13 +34,12 @@ const Timer = () => {
             minWidth:{ md:'70vh', xs: '30vh'}, 
             bgcolor: bgColors[modo], 
             borderRadius:4,
-            marginTop:{ xs:1, md:6 },
             display:'flex',
             flexDirection:'column',
             alignItems: 'center',
             gap:3,
-            padding:4,
-            height:{md:'50vh', xs:'45vh'}
+            padding:{ md:5, xs:3},
+            height:{md:'40vh', xs:'45vh'}
         }}>
             {/* Botões de modo */}
             <Box sx={{
@@ -49,7 +48,7 @@ const Timer = () => {
                 alignItems:'center',
                 gap: 2
             }}>
-                <Button variant="text" selsize="small" onClick={HandlePomodoro} sx={{
+                <Button variant="text" size="small" onClick={HandlePomodoro} sx={{
                     textTransform:'capitalize',
                     color:(modo==='pomodoro')? bgColors[modo]:'white.basic',
                     bgcolor: (modo==='pomodoro')? 'white.basic': bgColors[modo],
