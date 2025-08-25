@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BarChart } from '@mui/x-charts/BarChart';
-import { Box, Stack, Button } from '@mui/material';
+import { Box, Stack, Button, Typography } from '@mui/material';
 
 
 // prop pra alterar o tamanho dele
@@ -42,6 +42,15 @@ const UsageChart = ({ chartHeight }) => {
 
     return (
         <Box backgroundColor={'white.basic'} padding={5} borderRadius={16}>
+            <Typography variant="h3" color="black"
+                    sx={{
+                        fontSize: { xs: '1.2rem', md: '1.4rem' },
+                        fontFamily: 'cursive',
+                        textAlign: 'center',
+                        paddingBottom: 3
+                    }}>
+                    Horas focadas
+                </Typography>
             <Stack spacing={3} direction={'row'} justifyContent="flex-end" width="100%">
                 <Button variant="text" onClick={handleNessaSemana} sx={{
                     backgroundColor: selecionado === 'semana' ? "darkGreen.main" : 'transparent',

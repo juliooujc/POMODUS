@@ -30,7 +30,7 @@ const Statistics = () => {
                 zIndex: -1,
                 backgroundColor: 'white.off',
                 width: '100%',
-                height: '100vh',
+                minHeight: '100vh',
                 overflow: 'hidden'
             }}>
 
