@@ -21,8 +21,8 @@ class JSONDatabase:
         if not os.path.exists(self.file_path):
             initial_data = {
                 "users": [],
-                "products": [],
                 "tasks": [],
+                "pomodoro_sessions": [],
                 "metadata": {
                     "created_at": datetime.now().isoformat(),
                     "version": "1.0"
@@ -37,7 +37,7 @@ class JSONDatabase:
             with open(self.file_path, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except (FileNotFoundError, json.JSONDecodeError):
-            return {"users": [], "products": [], "tasks": []}
+            return {"users": [], "tasks": [], "pomodoro_sessions": []}
     
     def write_data(self, data: Dict):
         """Escreve dados no arquivo JSON"""
@@ -48,6 +48,10 @@ class JSONDatabase:
         """Obtém uma coleção específica"""
         data = self.read_data()
         return data.get(collection_name, [])
+    
+    def get_all_collections(self) -> Dict:
+        """Obtém todas as coleções"""
+        return self.read_data()
     
     def save_collection(self, collection_name: str, collection: List[Dict]):
         """Salva uma coleção específica"""
@@ -115,4 +119,4 @@ db = JSONDatabase()
 def init_json_db():
     """Inicializa o banco JSON"""
     db._initialize_file()
-    print("Banco JSON inicializado em data/database.json")
+    print("✅ Banco JSON inicializado em data/database.json")
