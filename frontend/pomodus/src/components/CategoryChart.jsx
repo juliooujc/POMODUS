@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box, Stack, Button, Typography } from '@mui/material';
-import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart } from '@mui/x-charts';
 
 const CategoryChart = ({ chartHeight }) => {
     // efeito de botao selecionado
