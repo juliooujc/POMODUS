@@ -1,5 +1,33 @@
 {
-  "users": [],
+  "users": [
+    {
+      "name": "erick roberto",
+      "email": "erick@email.com",
+      "age": null,
+      "password_hash": "scrypt:32768:8:1$PqIemLRtAusOToXT$401017ac544f8d90266631f4f51dba3b9b97944337c4ab9b43fda47659476f99f1163f8b7ff1647fe5bcef6d6632270eef53f5ee8d08310d1c9a4012138f3a2d",
+      "id": "2acf410e-44d9-4439-8dc3-c7d2223c6a25",
+      "created_at": "2025-08-26T15:17:40.203626",
+      "updated_at": "2025-08-26T15:17:40.203649"
+    },
+    {
+      "name": "julio cleiton",
+      "email": "julio@email.com",
+      "age": null,
+      "password_hash": "scrypt:32768:8:1$kCJ7ADOLOLw335SW$caade24a9b564650febb076a144d8861c2292907ddf14bd4d47a790bd1954408dadc5a1115c1a5f178c56885c76face91b6f6adfa3a53d4a08a5cddda91702f2",
+      "id": "26024999-ace1-4a8f-9335-158fbd0673ef",
+      "created_at": "2025-08-26T15:23:04.434696",
+      "updated_at": "2025-08-26T15:23:04.434743"
+    },
+    {
+      "name": "joao pedro",
+      "email": "joao@email.com",
+      "age": null,
+      "password_hash": "scrypt:32768:8:1$7trtwSBb8JouHBWN$f498836ab44c374de3eba872b16b7f10eeb2625328648fb34f77888ef9f0200bb8ac2eebc27a287f9dd0232aa7ecd061fee41573132f1db09d9906ef3b2deec6",
+      "id": "45bb9897-ea8f-48bd-9ee7-67afc3b2269f",
+      "created_at": "2025-08-26T15:24:11.321278",
+      "updated_at": "2025-08-26T15:24:11.321300"
+    }
+  ],
   "tasks": [
     {
       "id": "a1b2c3d4",

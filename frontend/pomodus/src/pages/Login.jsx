@@ -4,12 +4,33 @@ import { Box, Paper, Stack, Typography, Grid, TextField, Button, FormControlLabe
 import Header from '../components/Header'
 
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { apiPost } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   // Email e senha
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState('');
+  const navigate = useNavigate();
+
+  async function handleSubmit(e){
+    e.preventDefault();
+    setLoading(true); 
+    setErro('');
+    try {
+      const { token, user } = await apiPost('/api/auth/login', { email, password });
+      localStorage.setItem('pomodus_token', token);
+      localStorage.setItem('pomodus_user', JSON.stringify(user));
+      navigate('/pages/home');
+    } catch(err){
+      setErro(err.message || 'Erro ao fazer login');
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Box>
@@ -38,7 +59,7 @@ const Login = () => {
           margin:{ xs: 2, md: 15}
         }}>
           {/* Grid de login */}
-          <Grid container spacing={3} direction="column">
+          <Grid container spacing={3} direction="column" component="form" onSubmit={handleSubmit}>
             {/* Logo + Nome */}
             <Grid size={12}>
               <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
@@ -53,16 +74,26 @@ const Login = () => {
               </Stack>
             </Grid>
 
-            {/* Texto: Crie sua conta + Bem-vindo */}
+            {/* Texto: Bem-vindo */}
             <Grid size={12}>
               <Typography variant="h5" align="center" fontWeight="bold">Bem-vindo(a) de volta!</Typography>
               <Typography variant="body1" align="center" color="text.secondary">Faça login para continuar.</Typography>
             </Grid>
 
-            {/* Formulario: Email + senha + checkbox salvar usuário no localstorage*/}
+            {/* Formulario: Email + Senha */}
             <Grid size={12}>
-              <Stack spacing={2} component="form" onSubmit={() => { alert("oi") }}>
-                <TextField required id='email' label='Email' type="email" variant="outlined" fullWidth value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Stack spacing={2}>
+                <TextField
+                  required
+                  id='email'
+                  label='Email'
+                  type="email"
+                  variant="outlined"
+                  fullWidth
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+
                 <TextField
                   variant="outlined"
                   id='senha'
@@ -74,24 +105,30 @@ const Login = () => {
                   required
                   margin="normal"
                   InputProps={{
-                  endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() => setMostrarSenha((prev) => !prev)}
-                      edge="end"
-                      aria-label={
-                        mostrarSenha ? "Ocultar senha" : "Mostrar senha"
-                      }
-                    >
-                      {mostrarSenha ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={() => setMostrarSenha((prev) => !prev)}
+                          edge="end"
+                          aria-label={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}
+                        >
+                          {mostrarSenha ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
                     )
                   }}
                 />
+
                 <FormControlLabel control={<Checkbox />} label="Lembrar de mim" />
-                <Button type="submit" variant="contained" size="large" fullWidth>
-                  Entrar
+
+                {erro && (
+                  <Typography color="error" variant="body2">
+                    {erro}
+                  </Typography>
+                )}
+
+                <Button type="submit" variant="contained" size="large" fullWidth disabled={loading}>
+                  {loading ? 'Entrando...' : 'Entrar'}
                 </Button>
               </Stack>
             </Grid>
