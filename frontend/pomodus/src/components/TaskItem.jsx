@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     Box,
     Checkbox,
@@ -15,13 +16,58 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
+const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onEditToggle }) => {
+    const [editData, setEditData] = useState({
+        titulo: task.titulo,
+        obs: task.obs,
+        progress: task.progress,
+        total: task.total,
+        tag: task.tag
+    });
+
     const tagColors = {
         Faculdade: "rgba(61, 122, 255, 1)",
         Trabalho: "rgba(238, 156, 89, 1)",
         Casa: "rgba(231, 81, 81, 1)",
         Lazer: "rgba(131, 95, 172, 1)",
         Saude : "rgba(80, 185, 94, 1)"
+    };
+
+    const handleInputChange = (field, value) => {
+        setEditData(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
+    const handleSave = () => {
+        onUpdate(task.id, editData);
+        onEditToggle(null);
+    };
+
+    const handleCancel = () => {
+        setEditData({
+            titulo: task.titulo,
+            obs: task.obs,
+            progress: task.progress,
+            total: task.total,
+            tag: task.tag
+        });
+        onEditToggle(null);
+    };
+
+    const handleDeleteClick = () => {
+        onDelete(task.id);
+    };
+
+    const handleToggle = () => {
+        onToggle(task.id, !task.checked);
+    };
+
+    const handleSelect = () => {
+        if (!isEditing && !task.checked) {
+            onSelect(task);
+        }
     };
 
     if (isEditing) {
@@ -39,7 +85,8 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                     {/* Campo título */}
                     <TextField
                         fullWidth
-                        defaultValue={task.titulo}
+                        value={editData.titulo}
+                        onChange={(e) => handleInputChange('titulo', e.target.value)}
                         size="small"
                         label="Título"
                     />
@@ -47,7 +94,8 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                     {/* Observações */}
                     <TextField
                         fullWidth
-                        defaultValue={task.obs}
+                        value={editData.obs}
+                        onChange={(e) => handleInputChange('obs', e.target.value)}
                         size="small"
                         multiline
                         label="Obs:"
@@ -59,14 +107,16 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                             type="number"
                             size="small"
                             label="Ciclos"
-                            defaultValue={task.progress}
+                            value={editData.progress}
+                            onChange={(e) => handleInputChange('progress', parseInt(e.target.value) || 0)}
                             sx={{ width: 100 }}
                         />
                         {/* Categoria */}
                         <FormControl >
                             <InputLabel>Categoria</InputLabel>
                             <Select
-                                defaultValue={task.tag}
+                                value={editData.tag}
+                                onChange={(e) => handleInputChange('tag', e.target.value)}
                                 label="Selecionar Categoria"
                                 size="small"
                                 sx={{ minWidth: 150 }}
@@ -82,7 +132,7 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
 
                     {/* Ações */}
                     <Box display="flex" justifyContent="space-between" alignItems='center' gap={2}>
-                        <IconButton>
+                        <IconButton onClick={handleDeleteClick}>
                             <DeleteIcon/>
                         </IconButton>
                         <Box display="flex" justifyContent="flex-end" gap={2}>
@@ -90,7 +140,7 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                                 variant="body2"
                                 color="tertiary"
                                 sx={{ cursor: "pointer" }}
-                                onClick={() => onEditToggle(null)}
+                                onClick={handleCancel}
                             >
                                 Cancelar
                             </Typography>
@@ -104,7 +154,7 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                                     borderRadius: 1,
                                     cursor: "pointer"
                                 }}
-                                onClick={() => onEditToggle(null)}
+                                onClick={handleSave}
                             >
                                 Salvar
                             </Typography>
@@ -122,15 +172,17 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                 p: 2,
                 mb: 2,
                 borderRadius: 2,
-                backgroundColor: task.checked ? "white.off" : "white.basic"
+                backgroundColor: task.checked ? "white.off" : "white.basic",
+                cursor: task.checked ? 'default' : 'pointer'
             }}
+            onClick={handleSelect}
         >
             <Box display="flex" alignItems="center" justifyContent="space-between" sx={{color:'text.secondary', gap:2}} >
                 {/* Checkbox + título */}
                 <Box display="flex" alignItems="center" gap={1}>
                     <Checkbox
                         checked={task.checked}
-                        onChange={() => onToggle(task.id)}
+                        onChange={handleToggle}
                         sx={{ color: task.checked ? "primary.main" : "inherit" }}
                     />
                     <Typography
@@ -147,7 +199,13 @@ const TaskItem = ({ task, onToggle, onEditToggle, isEditing }) => {
                     <Typography variant="body2">
                         {task.progress}/{task.total}
                     </Typography>
-                    <IconButton size="small" onClick={() => onEditToggle(task.id)}>
+                    <IconButton 
+                        size="small" 
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onEditToggle(task.id);
+                        }}
+                    >
                         <EditIcon fontSize="small" />
                     </IconButton>
                 </Box>
