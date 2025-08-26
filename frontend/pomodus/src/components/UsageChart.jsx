@@ -1,42 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BarChart } from '@mui/x-charts/BarChart';
 import { Box, Stack, Button, Typography } from '@mui/material';
 
 
 // prop pra alterar o tamanho dele
-const UsageChart = ({ chartHeight }) => {
+const UsageChart = ({ chartHeight, dadosUso }) => {
 
     // dados do grafico eixo x e eixo y
     const [dataY, setDataY] = useState([]);
     const [dataX, setDataX] = useState([]);
+
 
     // efeito de botao selecionado
     const [selecionado, setSelecionado] = useState('semana');
 
     // dado mockado!!
     const handleNessaSemana = () => {
-        const diasSemana = [
-            'segunda-feira', 'terça-feira', 'quarta-feira',
-            'quinta-feira', 'sexta-feira', 'sábado', 'domingo'
-        ];
-        const dadoMockado = diasSemana.map(() =>
-            Math.floor(Math.random() * 10)
-        );
-
+        const diasSemana = ['seg', 'ter', 'qua', 'qui', 'sex', 'sáb', 'dom'];
         setDataX(diasSemana);
-        setDataY(dadoMockado);
+        setDataY(dadosUso.usoSemana || []);
         setSelecionado('semana');
     };
 
     // dado mockado!!
     const handleNesseMes = () => {
-        const diasMes = Array.from({ length: 31 }, (_, i) => i + 1); // dias 1 a 31
-        const dadoMockado = diasMes.map(() =>
-            Math.floor(Math.random() * 10)
-        );
-
-        setDataX(diasMes);
-        setDataY(dadoMockado);
+        const diasMes = Array.from({ length: 31 }, (_, i) => i + 1);
+        setDataX(diasMes.map(String));
+        setDataY(dadosUso.usoMes || []);
         setSelecionado('mes');
     };
 

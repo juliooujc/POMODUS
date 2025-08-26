@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Stack, Button, Typography } from '@mui/material';
 import { PieChart } from '@mui/x-charts';
 
-const CategoryChart = ({ chartHeight }) => {
+const CategoryChart = ({ chartHeight, dadosCategoria }) => {
     // efeito de botao selecionado
     const [selecionado, setSelecionado] = useState('semana');
     const [data, setData] = useState([]);
 
+    useEffect(() => {
+        handleNessaSemana();
+    }, [dadosCategoria]); // Re-executa quando os dados da API chegam
+
     const handleNessaSemana = () => {
         setSelecionado('semana');
-        setData(dataSemana);
+        setData(dadosCategoria.categoriasSemana || []);
     };
 
     const handleNesseMes = () => {
         setSelecionado('mes');
-        setData(dataMes);
+        setData(dadosCategoria.categoriasMes || []);
     };
 
     // dados mockados

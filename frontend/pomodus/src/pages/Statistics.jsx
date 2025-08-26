@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Grid, Stack, Typography } from '@mui/material';
 import Header from '../components/Header';
 import UsageChart from '../components/UsageChart';
@@ -15,9 +15,41 @@ import CategoryChart from '../components/CategoryChart';
 
 const Statistics = () => {
     // os estados responsaveis pela exibição das informação dos box coloridos
-    const [diasUsados, setDiasUsasdos] = useState(32);
-    const [produtividade, setProdutividade] = useState(12);
-    const [horas, setHoras] = useState(3);
+    const [diasUsados, setDiasUsados] = useState(0);
+    const [produtividade, setProdutividade] = useState(0);
+    const [horas, setHoras] = useState(0);
+
+    const [dadosGraficos, setDadosGraficos] = useState({
+        usoSemana: [],
+        usoMes: [],
+        categoriasSemana: [],
+        categoriasMes: [],
+    });
+    // useEffect para buscar os dados da API quando o componente for montado
+    useEffect(() => {
+        const fetchStatistics = async () => {
+            try {
+                // TODO: Trocar pela URL da sua API
+                const response = await fetch('http://127.0.0.1:5000/api/statistics');
+                const data = await response.json();
+
+                setDiasUsados(data.diasUsados);
+                setProdutividade(data.diasProdutivos);
+                setHoras(data.horasDeFoco);
+                setDadosGraficos({
+                    usoSemana: data.usoSemana,
+                    usoMes: data.usoMes,
+                    categoriasSemana: data.categoriasSemana,
+                    categoriasMes: data.categoriasMes,
+                });
+
+            } catch (error) {
+                console.error("Erro ao buscar estatísticas:", error);
+            }
+        };
+
+        fetchStatistics();
+    }, []); // O array vazio garante que o efeito rode apenas uma vez
 
     return (
         <Box>
@@ -87,8 +119,8 @@ const Statistics = () => {
                     {/* Grid para gráfico de barra + grafico pizza */}
                     <Grid size={12}>
                         <Stack direction={'row'} spacing={12} justifyContent="center">
-                            <UsageChart chartHeight={300} />
-                            <CategoryChart chartHeight={300} />
+                            <UsageChart chartHeight={300} dadosUso={dadosGraficos} />
+                            <CategoryChart chartHeight={300} dadosCategoria={dadosGraficos} />
                         </Stack>
                     </Grid>
 
