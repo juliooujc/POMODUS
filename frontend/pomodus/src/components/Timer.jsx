@@ -158,33 +158,33 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
             }}>
                 <Button variant="text" size="small" onClick={HandlePomodoro} sx={{
                     textTransform: 'capitalize',
-                    color: (modo === 'pomodoro') ? bgColors[modo] : 'white',
-                    bgcolor: (modo === 'pomodoro') ? 'white' : 'transparent',
+                    color: (modo === 'pomodoro') ? bgColors[modo] : 'white.basic',
+                    bgcolor: (modo === 'pomodoro') ? 'white.basic' : 'transparent',
                     "&:hover": {
-                        bgcolor: (modo === 'pomodoro') ? 'white' : 'rgba(255,255,255,0.1)'
-                    }
+                        bgcolor: (modo === 'pomodoro') ? 'white.basic' : 'rgba(255,255,255,0.1)'
+                    }   
                 }}>Pomodoro</Button>
                 <Button variant="text" size="small" onClick={handlePausaCurta} sx={{
                     textTransform: 'capitalize',
-                    color: (modo === 'pausaCurta') ? bgColors[modo] : 'white',
-                    bgcolor: (modo === 'pausaCurta') ? 'white' : 'transparent',
+                    color: (modo === 'pausaCurta') ? bgColors[modo] : 'white.basic',
+                    bgcolor: (modo === 'pausaCurta') ? 'white.basic' : 'transparent',
                     "&:hover": {
-                        bgcolor: (modo === 'pausaCurta') ? 'white' : 'rgba(255,255,255,0.1)'
+                        bgcolor: (modo === 'pausaCurta') ? 'white.basic' : 'rgba(255,255,255,0.1)'
                     }
                 }}>Pausa Curta</Button>
                 <Button variant="text" size="small" onClick={handlePausaLonga} sx={{
                     textTransform: 'capitalize',
-                    color: (modo === 'pausaLonga') ? bgColors[modo] : 'white',
-                    bgcolor: (modo === 'pausaLonga') ? 'white' : 'transparent',
+                    color: (modo === 'pausaLonga') ? bgColors[modo] : 'white.basic',
+                    bgcolor: (modo === 'pausaLonga') ? 'white.basic' : 'transparent',
                     "&:hover": {
-                        bgcolor: (modo === 'pausaLonga') ? 'white' : 'rgba(255,255,255,0.1)'
+                        bgcolor: (modo === 'pausaLonga') ? 'white.basic' : 'rgba(255,255,255,0.1)'
                     }
                 }}>Pausa Longa</Button>
             </Box>
 
             {/* Título da Tarefa */}
             <Typography variant="body1" sx={{
-                color: 'white',
+                color: 'white.basic',
                 fontWeight: 'bold',
                 textAlign: 'center'
             }}>
@@ -193,9 +193,9 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
 
             {/* Timer */}
             <Typography variant="h2" sx={{
-                color: 'white',
+                color: 'white.basic',
                 fontWeight: 'bold',
-                fontFamily: 'monospace',
+                fontFamily: 'cursive',
                 fontSize: '12vh'
             }}>
                 {formatTime(timeLeft)}
@@ -211,7 +211,7 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
                     borderRadius: 5,
                     backgroundColor: 'rgba(255,255,255,0.3)',
                     '& .MuiLinearProgress-bar': {
-                        backgroundColor: 'white',
+                        backgroundColor: 'white.basic',
                     }
                 }} 
             />
@@ -224,13 +224,13 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
                 gap: 2
             }}>
                 <IconButton onClick={handleReset} disabled={isRunning}>
-                    <ReplayIcon sx={{ color: 'white' }} />
+                    <ReplayIcon sx={{ color: 'white.basic' }} />
                 </IconButton>
                 <Button 
                     variant="contained" 
                     onClick={handleStartPause}
                     sx={{ 
-                        bgcolor: 'white', 
+                        bgcolor: 'white.basic', 
                         color: bgColors[modo],
                         "&:hover": {
                             bgcolor: 'rgba(255,255,255,0.9)'
@@ -241,7 +241,7 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
                     {isRunning ? 'Pausar' : 'Iniciar'}
                 </Button>
                 <IconButton onClick={handleSkip} disabled={isRunning}>
-                    <SkipNextIcon sx={{ color: 'white' }} />
+                    <SkipNextIcon sx={{ color: 'white.basic' }} />
                 </IconButton>
             </Box>
         </Box>

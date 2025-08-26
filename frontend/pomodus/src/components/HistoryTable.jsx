@@ -52,6 +52,7 @@ const columns = [
 
 ];
 
+// tem q vir assim dos dados do historico
 const rows = [
   { id: 1, data: '25/03/2025', atividade: 'Estudar React', horasGastas: '02:30', status: 'Concluído', categoria: 'Estudo' },
   { id: 2, data: '26/03/2025', atividade: 'Reunião com equipe', horasGastas: '01:15', status: 'Pendente', categoria: 'Trabalho' },

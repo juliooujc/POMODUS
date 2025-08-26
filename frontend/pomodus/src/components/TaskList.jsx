@@ -41,7 +41,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
             titulo: "Estudar React",
             obs: "Completar tutorial de hooks",
             checked: false,
-            tag: "high",
+            tag: "Faculdade", // lindos, é a categoria ta kkkkkkkkk (ex.: estudo, trabalho). A lista de categorias ta em: TaskItem, linha 28 -> com as corzinha
             progress: 2,
             total: 4,
             status: "InProgress"
@@ -245,7 +245,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
                 titulo: "Nova Tarefa",
                 obs: "",
                 checked: false,
-                tag: "medium",
+                tag: "",
                 progress: 0,
                 total: 4,
                 status: "ToDo"
