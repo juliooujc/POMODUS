@@ -48,101 +48,14 @@
   ],
   "tasks": [
     {
-      "id": "a1b2c3d4",
-      "title": "Finalizar Relatório",
-      "completed": true,
-      "description": "Relatório de vendas do Q3",
-      "priority": "medium",
-      "created_at": "2025-08-25T10:00:00.000000",
-      "updated_at": "2025-08-27T11:23:49.912714"
-    },
-    {
-      "id": "e5f6g7h8",
-      "title": "Estudar Flask",
-      "completed": true,
-      "description": "Verificar rotas e blueprints",
-      "priority": "medium",
-      "created_at": "2025-08-24T14:00:00.000000",
-      "updated_at": "2025-08-26T21:53:52.050508"
-    },
-    {
-      "id": "i9j0k1l2",
-      "title": "Revisar API",
-      "completed": true,
-      "description": "Testar endpoint de estatísticas",
-      "priority": "Trabalho",
-      "created_at": "2025-08-20T09:00:00.000000",
-      "updated_at": "2025-08-26T21:24:47.241782"
-    },
-    {
-      "title": "Teste API",
-      "completed": true,
-      "description": "Testando a API",
-      "priority": "medium",
-      "due_date": null,
-      "id": "20ee3ec0-7645-4936-b3f8-259cab040dbf",
-      "created_at": "2025-08-26T21:49:23.987755",
-      "updated_at": "2025-08-26T22:06:14.875819"
-    },
-    {
-      "title": "Teste API",
-      "completed": true,
-      "description": "Testando a API",
-      "priority": "medium",
-      "due_date": null,
-      "id": "5fa85940-5d80-4cfa-8f27-3652cd8ca6b5",
-      "created_at": "2025-08-26T21:50:48.097066",
-      "updated_at": "2025-08-26T22:06:20.567069"
-    },
-    {
-      "title": "asdads",
+      "title": "Nova Tarefaaaaa",
       "completed": true,
       "description": "",
-      "priority": "medium",
+      "priority": "Faculdade",
       "due_date": null,
-      "id": "0798d596-dee3-44d0-8dc8-f696c273379b",
-      "created_at": "2025-08-26T21:52:37.125718",
-      "updated_at": "2025-08-26T21:53:53.372566"
-    },
-    {
-      "title": "dsfdfsdfs",
-      "completed": true,
-      "description": "dsfsdf",
-      "priority": "medium",
-      "due_date": null,
-      "id": "1b317b79-2c9c-438b-8cc3-bcbdf066d420",
-      "created_at": "2025-08-26T21:54:50.549111",
-      "updated_at": "2025-08-26T23:31:41.032887"
-    },
-    {
-      "title": "Nova Tarefa",
-      "completed": true,
-      "description": "",
-      "priority": "medium",
-      "due_date": null,
-      "id": "50cf43cf-cc06-4344-95f9-983b84af8e58",
-      "created_at": "2025-08-26T21:59:28.768562",
-      "updated_at": "2025-08-26T21:59:33.659696"
-    },
-    {
-      "title": "Nova Tarefa",
-      "completed": true,
-      "description": "",
-      "priority": "medium",
-      "due_date": null,
-      "id": "5da170ce-fd51-45de-a201-ade3bb1571ca",
-      "created_at": "2025-08-26T21:59:47.022907",
-      "updated_at": "2025-08-26T22:38:14.789601"
-    },
-    {
-      "title": "asdasdadsad",
-      "completed": true,
-      "description": "",
-      "priority": "medium",
-      "due_date": null,
-      "id": "3a75b96b-d550-4b8e-a0be-b31077c2c0da",
-      "created_at": "2025-08-26T22:38:19.991603",
-      "updated_at": "2025-08-26T22:38:27.336250"
+      "id": "340d5691-ce6b-459b-88c0-29b6df0586bb",
+      "created_at": "2025-08-27T12:25:26.298699",
+      "updated_at": "2025-08-27T12:25:36.922680"
     }
   ],
   "pomodoro_sessions": []

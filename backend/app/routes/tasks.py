@@ -23,7 +23,7 @@ def create_task():
             'title': data['title'],
             'completed': data.get('completed', False),
             'description': data.get('description', ''),
-            'priority': data.get('priority', 'medium'),
+            'priority': data.get('priority', ''),
             'due_date': data.get('due_date')
         }
         

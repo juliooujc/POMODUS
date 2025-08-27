@@ -35,28 +35,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
     const open = Boolean(anchorEl);
 
     // Dados mockados para fallback
-    const mockTasks = [
-        {
-            id: "1",
-            titulo: "Estudar React",
-            obs: "Completar tutorial de hooks",
-            checked: false,
-            tag: "Faculdade", // lindos, é a categoria ta kkkkkkkkk (ex.: estudo, trabalho). A lista de categorias ta em: TaskItem, linha 28 -> com as corzinha
-            progress: 2,
-            total: 4,
-            status: "InProgress"
-        },
-        {
-            id: "2", 
-            titulo: "Reunião com equipe",
-            obs: "Preparar apresentação",
-            checked: true,
-            tag: "medium",
-            progress: 4,
-            total: 4,
-            status: "Completed"
-        }
-    ];
+
 
     // Converter estrutura do backend para frontend
     const convertBackendToFrontend = (backendTask) => ({
@@ -64,7 +43,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         titulo: backendTask.title,
         obs: backendTask.description || '',
         checked: backendTask.completed || false,
-        tag: backendTask.priority || 'medium',
+        tag: backendTask.priority || '',
         progress: 0,
         total: 4,
         status: backendTask.completed ? 'Completed' : 'ToDo'
@@ -75,7 +54,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         title: frontendTask.titulo,
         description: frontendTask.obs,
         completed: frontendTask.checked,
-        priority: frontendTask.tag || 'medium' // Adicione default value
+        priority: frontendTask.tag || frontendTask.priority // R.I.P Medium
     });
 
     // Buscar tarefas do backend
