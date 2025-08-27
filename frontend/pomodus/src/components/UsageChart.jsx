@@ -31,11 +31,11 @@ const UsageChart = ({ chartHeight, dadosUso }) => {
     };
 
     return (
-        <Box backgroundColor={'white.basic'} padding={5} borderRadius={16}>
+        <Box backgroundColor={'white.basic'} padding={{md:5, xs:2}} borderRadius={{md:16, xs:8}}>
             <Typography variant="h3" color="black"
                     sx={{
-                        fontSize: { xs: '1.2rem', md: '1.4rem' },
-                        fontFamily: 'cursive',
+                        fontSize: { xs: '1.2rem', md: '1.4rem' }, 
+                        fontWeight:'bold',
                         textAlign: 'center',
                         paddingBottom: 3
                     }}>
@@ -43,13 +43,13 @@ const UsageChart = ({ chartHeight, dadosUso }) => {
                 </Typography>
             <Stack spacing={3} direction={'row'} justifyContent="flex-end" width="100%">
                 <Button variant="text" onClick={handleNessaSemana} sx={{
-                    backgroundColor: selecionado === 'semana' ? "darkGreen.main" : 'transparent',
-                    color: selecionado === 'semana' ? 'white.basic' : 'darkGreen.main',
+                    backgroundColor: selecionado === 'semana' ? "primary.main" : 'transparent',
+                    color: selecionado === 'semana' ? 'white.basic' : 'primary.main',
                 }}>
                     Nessa semana
                 </Button>
                 <Button variant="text" onClick={handleNesseMes} sx={{
-                    backgroundColor: selecionado === 'mes' ? "darkGreen.main" : 'transparent',
+                    backgroundColor: selecionado === 'mes' ? "primary.main" : 'transparent',
                     color: selecionado === 'mes' ? 'white.basic' : 'darkGreen.main',
                 }}>
                     Nesse mês
@@ -68,7 +68,7 @@ const UsageChart = ({ chartHeight, dadosUso }) => {
                 series={[{
                     label: 'Horas trabalhadas',
                     data: dataY,
-                    color: 'darkGreen'
+                    color: '#D32F2F'
                 },]}
 
                 // TO DO: usar slotprops pra alterar a fonte

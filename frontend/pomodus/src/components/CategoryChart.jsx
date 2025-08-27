@@ -45,26 +45,26 @@ const CategoryChart = ({ chartHeight, dadosCategoria }) => {
 
 
     return (
-        <Box backgroundColor={'white.basic'} padding={5} borderRadius={16} justifyContent={'center'} alignContent={'center'}>
+        <Box backgroundColor={'white.basic'}  padding={{md:5, xs:2}} borderRadius={{md:16, xs:8}} justifyContent={'center'} alignContent={'center'}>
             <Stack spacing={5} direction={'column'}>
                 <Typography variant="h3" color="black"
                     sx={{
                         fontSize: { xs: '1.2rem', md: '1.4rem' },
-                        fontFamily: 'cursive',
+                        fontWeight:'bold',
                         textAlign: 'center'
                     }}>
                     Historico de Atividades
                 </Typography>
                 <Stack spacing={3} direction={'row'} justifyContent="center" width="100%">
                     <Button variant="text" onClick={handleNessaSemana} sx={{
-                        backgroundColor: selecionado === 'semana' ? "darkGreen.main" : 'transparent',
-                        color: selecionado === 'semana' ? 'white.basic' : 'darkGreen.main',
+                        backgroundColor: selecionado === 'semana' ? "primary.main" : 'transparent',
+                        color: selecionado === 'semana' ? 'white.basic' : 'primary.main',
                     }}>
                         Nessa semana
                     </Button>
                     <Button variant="text" onClick={handleNesseMes} sx={{
-                        backgroundColor: selecionado === 'mes' ? "darkGreen.main" : 'transparent',
-                        color: selecionado === 'mes' ? 'white.basic' : 'darkGreen.main',
+                        backgroundColor: selecionado === 'mes' ? "primary.main" : 'transparent',
+                        color: selecionado === 'mes' ? 'white.basic' : 'primary.main',
                     }}>
                         Nesse mês
                     </Button>

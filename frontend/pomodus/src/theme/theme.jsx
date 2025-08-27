@@ -31,6 +31,9 @@ const theme = createTheme({
     },
     yellow: {
       pastel: '#FFDB80'
+    },
+    darkYellow: {
+      main: '#b6994fff'
     }
   },
 });

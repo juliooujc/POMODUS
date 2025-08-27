@@ -139,15 +139,14 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
 
     return (
         <Box p={2} sx={{
-            minWidth: { md: '70vh', xs: '30vh' }, 
+            minWidth: { md: '70vh', xs: '39vh' }, 
             bgcolor: bgColors[modo], 
             borderRadius: 4,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             gap: 3,
-            padding: { md: 5, xs: 3 },
-            height: { md: '40vh', xs: '45vh' }
+            padding: { md: 5, xs: 3 }
         }}>
             {/* Botões de modo */}
             <Box sx={{
