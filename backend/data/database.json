@@ -26,6 +26,15 @@
       "id": "45bb9897-ea8f-48bd-9ee7-67afc3b2269f",
       "created_at": "2025-08-26T15:24:11.321278",
       "updated_at": "2025-08-26T15:24:11.321300"
+    },
+    {
+      "name": "Klissia Martins",
+      "email": "klissia@email.com",
+      "age": null,
+      "password_hash": "scrypt:32768:8:1$x35fZCLqGKVNHVs8$09cbc2cc1dceaab31dfe6113a3a39926c905202a813cfd3b1b6bf59f408428e0b865d8d6847aa2be34e25a121544687054da90dd64ad22bb330c1062b6213b04",
+      "id": "50844070-27ac-409f-acb1-6cd033dd61dd",
+      "created_at": "2025-08-26T20:19:37.826107",
+      "updated_at": "2025-08-26T20:19:37.826125"
     }
   ],
   "tasks": [

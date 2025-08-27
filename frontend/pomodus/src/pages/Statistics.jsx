@@ -70,7 +70,19 @@ const Statistics = () => {
                 <Grid container spacing={3} direction="column">
                     {/* Grid para nome: painel de estatisticas */}
                     <Grid size={12}>
-                        <Stack direction="column" spacing={1} alignItems="center" justifyContent="center" padding={2} backgroundColor='white.basic' mt={2} ml={5} mr={5} borderRadius={12}>
+                        <Stack
+                            direction={{ xs: "row", md: "column" }}
+                            spacing={1}
+                            alignItems="center"
+                            justifyContent="center" 
+                            sx={{
+                            padding:{md:2, xs:1},
+                            backgroundColor:'white.basic' ,
+                            mt:2,
+                            ml:5,
+                            mr:5,
+                            borderRadius:{md:12, xs:8}
+                        }}>
                             <EqualizerIcon color="primary" />
                             <Typography variant="h3" color="primary.main"
                                 sx={{
@@ -85,29 +97,30 @@ const Statistics = () => {
                     {/* Grid para os 3 quadradinhos de informacao */}
                     <Grid size={12}>
                         {/* Um stack pra deixar um do lado do outro */}
-                        <Stack direction={'row'} spacing={5} alignItems="center" justifyContent="center">
+                        <Stack  direction={{ xs: "column", md: "row" }} spacing={{md:5, xs:2}} alignItems="center" justifyContent="center">
                             {/* box dos dias usados */}
-                            <Box padding={3} borderRadius={5} backgroundColor={'red.pastel'}>
+                            <Box width={{xs:'80%', md:'25%'}} padding={{md:3, xs:2}} borderRadius={{md:5, xs:3}} backgroundColor={'red.pastel'}>
                                 <Stack direction={'row'} spacing={1}>
-                                    <CalendarMonthOutlinedIcon />
-                                    <Typography variant="h5" align="left" fontWeight="bold">Dias usados</Typography>
+                                    <CalendarMonthOutlinedIcon color='primary' />
+                                    <Typography variant="h5" fontSize={{md:'20px',xs:'18px'}} align="left" fontWeight="bold" color='primary'>Dias usados</Typography>
                                 </Stack>
                                 <Typography variant="body1" align="left" color="text.secondary">Você usou por {diasUsados} dias</Typography>
                             </Box>
                             {/* box das horas de foco */}
-                            <Box padding={3} borderRadius={5} backgroundColor={'yellow.pastel'}>
+                            <Box width={{xs:'80%', md:'25%'}} padding={{md:3, xs:2}} borderRadius={{md:5, xs:3}} backgroundColor={'yellow.pastel'}>
                                 <Stack direction={'row'} spacing={1}>
-                                    <AccessAlarmOutlinedIcon />
-                                    <Typography variant="h5" align="left" fontWeight="bold">Horas</Typography>
+                                    <AccessAlarmOutlinedIcon color='darkYellow'/>
+                                    <Typography variant="h5" fontSize={{md:'20px',xs:'18px'}} color='darkYellow' align="left" fontWeight="bold">Horas</Typography>
                                 </Stack>
 
                                 <Typography variant="body1" align="left" color="text.secondary">Você já dedicou {horas} horas de foco!</Typography>
                             </Box>
 
                             {/* box da produtividade */}
-                            <Box padding={3} borderRadius={5} backgroundColor={'green.pastel'}>
-                                <Stack direction={'row'} spacing={1}><FastForwardOutlinedIcon />
-                                    <Typography variant="h5" align="left" fontWeight="bold">Produtividade</Typography>
+                            <Box width={{xs:'80%', md:'25%'}} padding={{md:3, xs:2}} borderRadius={{md:5, xs:3}} backgroundColor={'green.pastel'}>
+                                <Stack direction={'row'} spacing={1}>
+                                    <FastForwardOutlinedIcon color='darkGreen'/>
+                                    <Typography variant="h5" fontSize={{md:'20px',xs:'18px'}} align="left" fontWeight="bold" color='darkGreen'>Produtividade</Typography>
                                 </Stack>
                                 <Typography variant="body1" align="left" color="text.secondary">Você foi produtivo por {produtividade} dias!! Continue assim</Typography>
                             </Box>
@@ -118,7 +131,7 @@ const Statistics = () => {
 
                     {/* Grid para gráfico de barra + grafico pizza */}
                     <Grid size={12}>
-                        <Stack direction={'row'} spacing={12} justifyContent="center">
+                        <Stack direction={{ xs: "column", md: "row" }} spacing={{md:12, xs:4}} justifyContent="center" p={{xs:2,md:0}}>
                             <UsageChart chartHeight={300} dadosUso={dadosGraficos} />
                             <CategoryChart chartHeight={300} dadosCategoria={dadosGraficos} />
                         </Stack>
@@ -127,7 +140,20 @@ const Statistics = () => {
 
                     {/* Grid para título: Historico de atividades */}
                     <Grid size={12}>
-                        <Stack direction="column" spacing={1} alignItems="center" justifyContent="center" padding={2} backgroundColor='white.basic' mt={2} ml={5} mr={5} borderRadius={12}>
+                        <Stack
+                            direction={{ xs: "row", md: "column" }}
+                            spacing={1}
+                            alignItems="center"
+                            justifyContent="center" 
+                            sx={{
+                            padding:{md:2, xs:1},
+                            backgroundColor:'white.basic' ,
+                            mt:2,
+                            ml:5,
+                            mr:5,
+                            borderRadius:{md:12, xs:8}
+                            }}
+                        >
                             <ManageHistoryIcon color="primary" />
                             <Typography variant="h3" color="primary.main"
                                 sx={{
