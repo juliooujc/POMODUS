@@ -8,6 +8,7 @@ def create_app():
     app.config['SECRET_KEY'] = 'dev-secret-key'
     app.config['DEBUG'] = True
     app.config['DATABASE_FILE'] = 'data/database.json'
+    app.url_map.strict_slashes = False
     
     # Habilitar CORS
     CORS(app)

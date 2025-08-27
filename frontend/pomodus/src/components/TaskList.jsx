@@ -75,7 +75,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         title: frontendTask.titulo,
         description: frontendTask.obs,
         completed: frontendTask.checked,
-        priority: frontendTask.tag
+        priority: frontendTask.tag || 'medium' // Adicione default value
     });
 
     // Buscar tarefas do backend
@@ -84,7 +84,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
             setLoading(true);
             console.log("Buscando tarefas...");
             
-            const response = await fetch('http://localhost:5000/tasks');
+            const response = await fetch('http://localhost:5000/api/tasks');
             
             if (!response.ok) {
                 throw new Error('Erro ao buscar tarefas');
@@ -99,8 +99,6 @@ const TaskList = ({ onTaskSelect, refresh }) => {
             setError(err.message);
             setSnackbar({ open: true, message: 'Erro ao carregar tarefas. Usando dados locais.', severity: 'warning' });
             
-            // Usar dados mockados como fallback
-            setTasks(mockTasks);
         } finally {
             setLoading(false);
         }
@@ -111,7 +109,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         try {
             const backendData = convertFrontendToBackend(updates);
             
-            const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+            const response = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -142,9 +140,12 @@ const TaskList = ({ onTaskSelect, refresh }) => {
     // Criar nova tarefa no backend
     const createTask = async (taskData) => {
         try {
-            const backendData = convertFrontendToBackend(taskData);
+            console.log("Dados da tarefa a ser criada:", taskData);
             
-            const response = await fetch('http://localhost:5000/tasks', {
+            const backendData = convertFrontendToBackend(taskData);
+            console.log("Dados convertidos para backend:", backendData);
+            
+            const response = await fetch('http://localhost:5000/api/tasks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -152,11 +153,16 @@ const TaskList = ({ onTaskSelect, refresh }) => {
                 body: JSON.stringify(backendData)
             });
 
+            console.log("Resposta do servidor:", response.status, response.statusText);
+            
             if (!response.ok) {
-                throw new Error('Erro ao criar tarefa');
+                const errorText = await response.text();
+                console.error("Erro detalhado:", errorText);
+                throw new Error('Erro ao criar tarefa: ' + errorText);
             }
 
             const newBackendTask = await response.json();
+            console.log("Tarefa criada no backend:", newBackendTask);
             const newFrontendTask = convertBackendToFrontend(newBackendTask);
             
             setTasks(prev => [...prev, newFrontendTask]);
@@ -165,7 +171,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
             return newFrontendTask;
             
         } catch (err) {
-            console.error('Erro ao criar tarefa:', err);
+            console.error('Erro completo ao criar tarefa:', err);
             setSnackbar({ open: true, message: 'Erro ao criar tarefa', severity: 'error' });
             
             // Fallback: criar localmente
@@ -181,7 +187,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
     // Deletar tarefa no backend
     const deleteTask = async (taskId) => {
         try {
-            const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+            const response = await fetch(`http://localhost:5000/api/tasks/${taskId}`, {
                 method: 'DELETE',
             });
 

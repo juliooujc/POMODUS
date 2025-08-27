@@ -33,7 +33,7 @@ def create_task():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@tasks_bp.route('/<string:task_id>', methods=['GET'])
+@tasks_bp.route('/<string:task_id>/', methods=['GET'])
 def get_task(task_id):
     try:
         task = db.get_item('tasks', task_id)
@@ -43,7 +43,7 @@ def get_task(task_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@tasks_bp.route('/<string:task_id>', methods=['PUT'])
+@tasks_bp.route('/<string:task_id>/', methods=['PUT'])
 def update_task(task_id):
     try:
         data = request.get_json()
@@ -65,7 +65,7 @@ def update_task(task_id):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@tasks_bp.route('/<string:task_id>', methods=['DELETE'])
+@tasks_bp.route('/<string:task_id>/', methods=['DELETE'])
 def delete_task(task_id):
     try:
         if not db.delete_item('tasks', task_id):
