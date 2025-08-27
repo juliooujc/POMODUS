@@ -26,11 +26,12 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
 
     // Efeito para atualizar o timeLeft quando timeConfig ou modo mudar
     useEffect(() => {
+        // Só reseta se não estiver rodando
         if (!isRunning) {
             setTimeLeft(timeConfig[modo]);
             setProgress(0);
         }
-    }, [timeConfig, modo, isRunning]);
+    }, [timeConfig, modo]);
 
     useEffect(() => {
         if (isRunning) {
@@ -57,11 +58,12 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
     }, [timeLeft, modo, timeConfig]);
 
     const handleStartPause = () => {
-        setIsRunning(!isRunning);
+        setIsRunning(prev => !prev);
     };
 
     const handleReset = () => {
         setIsRunning(false);
+        // Reset para o tempo configurado do modo atual
         setTimeLeft(timeConfig[modo]);
         setProgress(0);
     };
