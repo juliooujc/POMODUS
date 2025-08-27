@@ -35,17 +35,26 @@
       "id": "50844070-27ac-409f-acb1-6cd033dd61dd",
       "created_at": "2025-08-26T20:19:37.826107",
       "updated_at": "2025-08-26T20:19:37.826125"
+    },
+    {
+      "name": "thais",
+      "email": "thais@gmail.com",
+      "age": null,
+      "password_hash": "scrypt:32768:8:1$ToaUBEm5MirOQAOn$9f5ce244cbb4197971dec52193df2377e9614dd89527cb766033560dfd9aa83dcb4d095e6d1096d801183f62639ef68ca87f65525a89d4cfa694ea28301a64a1",
+      "id": "e539fb52-86de-4f3a-961d-efcf199c5a47",
+      "created_at": "2025-08-27T11:23:00.092506",
+      "updated_at": "2025-08-27T11:23:00.092524"
     }
   ],
   "tasks": [
     {
       "id": "a1b2c3d4",
       "title": "Finalizar Relatório",
-      "completed": false,
+      "completed": true,
       "description": "Relatório de vendas do Q3",
       "priority": "medium",
       "created_at": "2025-08-25T10:00:00.000000",
-      "updated_at": "2025-08-26T23:31:43.775378"
+      "updated_at": "2025-08-27T11:23:49.912714"
     },
     {
       "id": "e5f6g7h8",

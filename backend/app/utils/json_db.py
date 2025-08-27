@@ -119,4 +119,4 @@ db = JSONDatabase()
 def init_json_db():
     """Inicializa o banco JSON"""
     db._initialize_file()
-    print("✅ Banco JSON inicializado em data/database.json")
+    print("Banco JSON inicializado em data/database.json")

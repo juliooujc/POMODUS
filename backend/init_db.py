@@ -8,5 +8,5 @@ from app.utils.json_db import init_json_db
 
 if __name__ == '__main__':
     init_json_db()
-    print("✅ Banco de dados inicializado com sucesso!")
-    print("📁 Arquivo criado: data/database.json")
+    print("Banco de dados inicializado com sucesso!")
+    print("Arquivo criado: data/database.json")

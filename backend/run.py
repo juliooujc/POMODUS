@@ -27,6 +27,6 @@ def health():
     return {'status': 'healthy', 'database': 'json'}
 
 if __name__ == '__main__':
-    print("🚀 Servidor iniciado em http://127.0.0.1:5000")
-    print("📁 Banco de dados: data/database.json")
+    print("Servidor iniciado em http://127.0.0.1:5000")
+    print("Banco de dados: data/database.json")
     app.run(debug=True)
