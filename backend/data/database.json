@@ -41,11 +41,11 @@
     {
       "id": "a1b2c3d4",
       "title": "Finalizar Relatório",
-      "completed": true,
+      "completed": false,
       "description": "Relatório de vendas do Q3",
-      "priority": "Trabalho",
+      "priority": "medium",
       "created_at": "2025-08-25T10:00:00.000000",
-      "updated_at": "2025-08-26T21:26:39.601234"
+      "updated_at": "2025-08-26T23:31:43.775378"
     },
     {
       "id": "e5f6g7h8",
@@ -97,13 +97,13 @@
     },
     {
       "title": "dsfdfsdfs",
-      "completed": false,
+      "completed": true,
       "description": "dsfsdf",
-      "priority": "Casa",
+      "priority": "medium",
       "due_date": null,
       "id": "1b317b79-2c9c-438b-8cc3-bcbdf066d420",
       "created_at": "2025-08-26T21:54:50.549111",
-      "updated_at": "2025-08-26T21:55:00.622152"
+      "updated_at": "2025-08-26T23:31:41.032887"
     },
     {
       "title": "Nova Tarefa",
@@ -117,13 +117,23 @@
     },
     {
       "title": "Nova Tarefa",
-      "completed": false,
+      "completed": true,
       "description": "",
-      "priority": "Saude",
+      "priority": "medium",
       "due_date": null,
       "id": "5da170ce-fd51-45de-a201-ade3bb1571ca",
       "created_at": "2025-08-26T21:59:47.022907",
-      "updated_at": "2025-08-26T21:59:50.778736"
+      "updated_at": "2025-08-26T22:38:14.789601"
+    },
+    {
+      "title": "asdasdadsad",
+      "completed": true,
+      "description": "",
+      "priority": "medium",
+      "due_date": null,
+      "id": "3a75b96b-d550-4b8e-a0be-b31077c2c0da",
+      "created_at": "2025-08-26T22:38:19.991603",
+      "updated_at": "2025-08-26T22:38:27.336250"
     }
   ],
   "pomodoro_sessions": []

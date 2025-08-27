@@ -1,6 +1,7 @@
 import { Box, Button, IconButton, Typography, LinearProgress } from "@mui/material"
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useTimer } from "../contexts/TimerContext";
 import ReplayIcon from '@mui/icons-material/Replay';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -8,23 +9,28 @@ import PauseIcon from '@mui/icons-material/Pause';
 
 const Timer = ({ selectedTask, onTimerComplete }) => {
     const [modo, setModo] = useState('pomodoro');
-    const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutos em segundos
+    const [timeLeft, setTimeLeft] = useState(25 * 60);
     const [isRunning, setIsRunning] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [cicloCount, setCicloCount] = useState(0);
+    const [pomodoroCompletado, setPomodoroCompletado] = useState(false);
     const intervalRef = useRef(null);
-    const { user } = useAuth(); // Hook para obter usuário autenticado
-
-    const timeConfig = {
-        pomodoro: 25 * 60, // 25 minutos
-        pausaCurta: 5 * 60, // 5 minutos
-        pausaLonga: 15 * 60 // 15 minutos
-    };
+    const { user } = useAuth();
+    const { timeConfig } = useTimer();
 
     const bgColors = {
         pomodoro: "#BA4949",
         pausaCurta: "#73c765ff",
         pausaLonga: "#58A6F0"
     };
+
+    // Efeito para atualizar o timeLeft quando timeConfig ou modo mudar
+    useEffect(() => {
+        if (!isRunning) {
+            setTimeLeft(timeConfig[modo]);
+            setProgress(0);
+        }
+    }, [timeConfig, modo, isRunning]);
 
     useEffect(() => {
         if (isRunning) {
@@ -48,7 +54,7 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
         const totalTime = timeConfig[modo];
         const calculatedProgress = ((totalTime - timeLeft) / totalTime) * 100;
         setProgress(calculatedProgress);
-    }, [timeLeft, modo]);
+    }, [timeLeft, modo, timeConfig]);
 
     const handleStartPause = () => {
         setIsRunning(!isRunning);
@@ -61,27 +67,71 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
     };
 
     const handleSkip = () => {
-        setIsRunning(false);
-        // Alternar entre modos
-        const modes = ['pomodoro', 'pausaCurta', 'pausaLonga'];
-        const currentIndex = modes.indexOf(modo);
-        const nextMode = modes[(currentIndex + 1) % modes.length];
-        setModo(nextMode);
-        setTimeLeft(timeConfig[nextMode]);
-        setProgress(0);
+        // Simula o término do tempo atual
+        handleTimerComplete();
+    };
+
+    // Função para determinar o próximo modo baseado no ciclo
+    const getNextMode = (currentMode, currentCiclo, intervaloLonga) => {
+        if (currentMode === 'pomodoro') {
+            // Verifica se é hora da pausa longa
+            if ((currentCiclo + 1) % intervaloLonga === 0) {
+                return 'pausaLonga';
+            } else {
+                return 'pausaCurta';
+            }
+        } else {
+            // Depois de qualquer pausa, volta para pomodoro
+            return 'pomodoro';
+        }
     };
 
     const handleTimerComplete = async () => {
         setIsRunning(false);
         
-        if (modo === 'pomodoro' && selectedTask) {
-            // Registrar pomodoro completado no backend
+        let nextMode;
+        let newCicloCount = cicloCount;
+        let shouldRegisterPomodoro = false;
+
+        if (modo === 'pomodoro') {
+            // Pomodoro completado - marca como completado mas não incrementa ciclo ainda
+            setPomodoroCompletado(true);
+            shouldRegisterPomodoro = true;
+            
+            // Determina próxima pausa
+            if ((cicloCount + 1) % timeConfig.intervaloPausaLonga === 0) {
+                nextMode = 'pausaLonga';
+            } else {
+                nextMode = 'pausaCurta';
+            }
+
+        } else if (modo === 'pausaCurta') {
+            // Pausa curta completada - incrementa ciclo apenas agora
+            if (pomodoroCompletado) {
+                newCicloCount = cicloCount + 1;
+                setCicloCount(newCicloCount);
+                setPomodoroCompletado(false);
+            }
+            nextMode = 'pomodoro';
+            
+        } else if (modo === 'pausaLonga') {
+            // Pausa longa completada - incrementa ciclo
+            if (pomodoroCompletado) {
+                newCicloCount = cicloCount + 1;
+                setCicloCount(newCicloCount);
+                setPomodoroCompletado(false);
+            }
+            nextMode = 'pomodoro';
+        }
+
+        // Registrar pomodoro no backend se necessário
+        if (shouldRegisterPomodoro && selectedTask) {
             try {
                 const response = await fetch('http://localhost:3001/api/pomodoros', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.token}` // Se estiver usando autenticação
+                        'Authorization': `Bearer ${user.token}`
                     },
                     body: JSON.stringify({
                         taskId: selectedTask.id,
@@ -105,6 +155,16 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
         if (Notification.permission === 'granted') {
             new Notification(modo === 'pomodoro' ? 'Pomodoro concluído!' : 'Pausa concluída!');
         }
+
+        // Mudar para o próximo modo automaticamente
+        setTimeout(() => {
+            setModo(nextMode);
+            setTimeLeft(timeConfig[nextMode]);
+            setProgress(0);
+            
+            // Iniciar automaticamente o próximo timer
+            setIsRunning(true);
+        }, 1000);
     };
 
     const formatTime = (seconds) => {
@@ -148,6 +208,16 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
             gap: 3,
             padding: { md: 5, xs: 3 }
         }}>
+            {/* Contador de ciclos */}
+            <Typography variant="body2" sx={{
+                color: 'white.basic',
+                opacity: 0.8,
+                fontSize: '0.9rem'
+            }}>
+                Ciclo {cicloCount + 1} • Próxima pausa longa: {timeConfig.intervaloPausaLonga - (cicloCount % timeConfig.intervaloPausaLonga)}
+                {pomodoroCompletado && " • Pomodoro concluído!"}
+            </Typography>
+
             {/* Botões de modo */}
             <Box sx={{
                 display: 'flex',
