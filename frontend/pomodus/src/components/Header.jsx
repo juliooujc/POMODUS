@@ -1,6 +1,6 @@
 import { Paper, Typography, Button, Stack, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 
 import StackedBarChartIcon from '@mui/icons-material/StackedBarChart';
 import TuneIcon from '@mui/icons-material/Tune';
@@ -11,6 +11,20 @@ import ConfigPopup from './ConfigPopup';
 const Header = () => {
   const navigate = useNavigate();
   const [openConfig, setOpenConfig] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+
+  // Verifica login ao carregar o Header
+  useEffect(() => {
+    const token = localStorage.getItem("pomodus_token");
+    setIsLogged(!!token); // se existir token → true
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("pomodus_token");
+    localStorage.removeItem("pomodus_user");
+    setIsLogged(false);
+    navigate("/login");
+  };
 
   const handleLogin = () => {
     navigate("/login");
@@ -78,6 +92,7 @@ const Header = () => {
         </Stack>
 
         {/* Botões centrais */}
+        {isLogged && (
         <Stack sx={{ display: 'flex', flexDirection: 'row' }}>
           <Button
             variant="contained"
@@ -111,11 +126,12 @@ const Header = () => {
               Painel de Estatísticas
             </Typography>
           </Button>
-        </Stack>
+        </Stack>)}
 
 
         {/* Ícones à direita */}
-        <Stack sx={{ display: 'flex', flexDirection: 'row' }}>
+        {isLogged && (
+          <Stack sx={{ display: 'flex', flexDirection: 'row' }}>
           <IconButton
             sx={{ mr: 1, color: 'white.basic' }}
             onClick={handleConfig}
@@ -125,11 +141,12 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{ mr: 3, backgroundColor: '#efb8b823', gap: 1 }}
-            onClick={handleLogin}
+            onClick={handleLogout}
           >
             Sair
           </Button>
         </Stack>
+        )}
       </Paper>
 
       {/* Popup de Configurações */}
