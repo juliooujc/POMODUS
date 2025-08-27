@@ -45,7 +45,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         checked: backendTask.completed || false,
         tag: backendTask.priority || '',
         progress: 0,
-        total: 4,
+        total: 99, // tem que mexer aqui pro contador de ciclos ficar certinho
         status: backendTask.completed ? 'Completed' : 'ToDo'
     });
 
@@ -54,7 +54,8 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         title: frontendTask.titulo,
         description: frontendTask.obs,
         completed: frontendTask.checked,
-        priority: frontendTask.tag || frontendTask.priority // R.I.P Medium
+        priority: frontendTask.tag || frontendTask.priority, // R.I.P Medium
+        // cade o responsavel pelo contador de ciclos heree
     });
 
     // Buscar tarefas do backend
@@ -235,7 +236,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
                 checked: false,
                 tag: "",
                 progress: 0,
-                total: 4,
+                total: 0,
                 status: "ToDo"
             };
 

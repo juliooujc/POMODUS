@@ -13,6 +13,11 @@ const Header = () => {
   const [openConfig, setOpenConfig] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
 
+  function HandleVoltar(e) {
+    e.preventDefault();
+    navigate('/');
+  }
+
   // Verifica login ao carregar o Header
   useEffect(() => {
     const token = localStorage.getItem("pomodus_token");
@@ -72,6 +77,7 @@ const Header = () => {
           alignItems="center"
           justifyContent="center"
           sx={{ ml: { xs: 1, md: 3 } , }}
+          onClick={HandleVoltar}
         >
           <img
             src="/interface/logo.svg"

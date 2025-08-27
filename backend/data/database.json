@@ -44,18 +44,89 @@
       "id": "e539fb52-86de-4f3a-961d-efcf199c5a47",
       "created_at": "2025-08-27T11:23:00.092506",
       "updated_at": "2025-08-27T11:23:00.092524"
+    },
+    {
+      "name": "Thais",
+      "email": "thais@email.com",
+      "age": null,
+      "password_hash": "scrypt:32768:8:1$umWEY15pPt2i1Jth$4b0fec22191a08dd008e695c544236aa67e42a634a6408078d3284f080584a4ac67802fd178a5ea07bad02bfc2a9181a10c5d43956556e3a3695bfc786473d37",
+      "id": "2fa83d0a-68ac-40f5-af85-3ae3dade39c5",
+      "created_at": "2025-08-27T15:03:55.028796",
+      "updated_at": "2025-08-27T15:03:55.028812"
     }
   ],
   "tasks": [
     {
-      "title": "Nova Tarefaaaaa",
-      "completed": true,
+      "title": "Bora trabalhar",
+      "completed": false,
       "description": "",
-      "priority": "Faculdade",
+      "priority": "Lazer",
       "due_date": null,
       "id": "340d5691-ce6b-459b-88c0-29b6df0586bb",
       "created_at": "2025-08-27T12:25:26.298699",
-      "updated_at": "2025-08-27T12:25:36.922680"
+      "updated_at": "2025-08-27T15:09:18.547117"
+    },
+    {
+      "title": "Nova Tarefa",
+      "completed": false,
+      "description": "",
+      "priority": "",
+      "due_date": null,
+      "id": "ad0dc76e-b839-49f1-b265-c4a2170f3dd1",
+      "created_at": "2025-08-27T15:11:23.393411",
+      "updated_at": "2025-08-27T15:11:28.301033"
+    },
+    {
+      "title": "Nova Tarefa",
+      "completed": false,
+      "description": "",
+      "priority": "",
+      "due_date": null,
+      "id": "2d968cf3-86e8-4d2b-97d2-0aae24a39322",
+      "created_at": "2025-08-27T15:12:58.736962",
+      "updated_at": "2025-08-27T15:13:03.576060",
+      "progress": 2
+    },
+    {
+      "title": "tarefa legal",
+      "completed": false,
+      "description": "",
+      "priority": "",
+      "due_date": null,
+      "id": "ab434532-89b9-4a84-a18c-33e36938929d",
+      "created_at": "2025-08-27T15:16:32.180979",
+      "updated_at": "2025-08-27T15:16:58.634634",
+      "progress": 7
+    },
+    {
+      "title": "Nova Tarefa",
+      "completed": false,
+      "description": "",
+      "priority": "",
+      "due_date": null,
+      "id": "fddd4b38-4468-424d-ba0c-f1e99f1662ce",
+      "created_at": "2025-08-27T15:17:31.198292",
+      "updated_at": "2025-08-27T15:18:22.656263"
+    },
+    {
+      "title": "Nova Tarefa",
+      "completed": false,
+      "description": "",
+      "priority": "",
+      "due_date": null,
+      "id": "bc0653dc-3492-4da7-92ca-f1072b0df35d",
+      "created_at": "2025-08-27T15:18:47.833805",
+      "updated_at": "2025-08-27T15:18:54.618546"
+    },
+    {
+      "title": "Nova Tarefa",
+      "completed": false,
+      "description": "",
+      "priority": "",
+      "due_date": null,
+      "id": "e67fecaf-1761-47ab-9b08-e84c7b7f7e44",
+      "created_at": "2025-08-27T15:19:19.907807",
+      "updated_at": "2025-08-27T15:19:25.147555"
     }
   ],
   "pomodoro_sessions": []
