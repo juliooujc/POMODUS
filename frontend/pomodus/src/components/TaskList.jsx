@@ -45,7 +45,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         checked: backendTask.completed || false,
         tag: backendTask.priority || '',
         progress: 0,
-        total: 4,
+        total: 99, // tem que mexer aqui pro contador de ciclos ficar certinho
         status: backendTask.completed ? 'Completed' : 'ToDo'
     });
 
@@ -54,7 +54,8 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         title: frontendTask.titulo,
         description: frontendTask.obs,
         completed: frontendTask.checked,
-        priority: frontendTask.tag || frontendTask.priority // R.I.P Medium
+        priority: frontendTask.tag || frontendTask.priority, // R.I.P Medium
+        // cade o responsavel pelo contador de ciclos heree
     });
 
     // Buscar tarefas do backend
@@ -205,6 +206,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
             setTasks(prev => prev.map(task => 
                 task.id === taskId ? { ...task, checked: !checked } : task
             ));
+            console.error("erro: " + err);
         }
     };
 
@@ -213,6 +215,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
             await updateTask(taskId, updates);
         } catch (err) {
             // Rollback não necessário pois o estado já foi atualizado localmente
+            console.error("erro: " + err);
         }
     };
 
@@ -221,6 +224,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
             await deleteTask(taskId);
         } catch (err) {
             // Não remover visualmente em caso de erro
+            console.error("erro: " + err);
         }
     };
 
@@ -232,7 +236,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
                 checked: false,
                 tag: "",
                 progress: 0,
-                total: 4,
+                total: 0,
                 status: "ToDo"
             };
 
@@ -312,7 +316,8 @@ const TaskList = ({ onTaskSelect, refresh }) => {
                 )}
             </Box>
 
-            {/* Botão Nova Tarefa */}
+            {/* Botão Nova Tarefa com condicional de aparecer só quando tab for 0 */}
+            {tab === 0 && (
             <Button
                 fullWidth
                 variant="contained" 
@@ -326,7 +331,7 @@ const TaskList = ({ onTaskSelect, refresh }) => {
                 disabled={loading}
             >
                 <AddIcon/>Nova Tarefa
-            </Button>
+            </Button>)}
 
             {/* Snackbar para feedback */}
             <Snackbar 

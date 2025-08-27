@@ -108,7 +108,11 @@ const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onE
                             size="small"
                             label="Ciclos"
                             value={editData.progress}
-                            onChange={(e) => handleInputChange('progress', parseInt(e.target.value) || 0)}
+                            onChange={(e) => {
+                                handleInputChange('progress', parseInt(e.target.value) || 0)
+                                console.log("mexi no ciclos: " + e.target.value)
+
+                            }}
                             sx={{ width: 100 }}
                         />
                         {/* Categoria */}
