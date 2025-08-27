@@ -216,7 +216,11 @@ const Timer = ({ selectedTask, onTimerComplete }) => {
                 opacity: 0.8,
                 fontSize: '0.9rem'
             }}>
-                Ciclo {cicloCount + 1} • Próxima pausa longa: {timeConfig.intervaloPausaLonga - (cicloCount % timeConfig.intervaloPausaLonga)}
+                Ciclo {cicloCount + 1} • 
+                {modo === 'pausaLonga' 
+                    ? ' Pausa longa' 
+                    : ` Próxima pausa longa: ${timeConfig.intervaloPausaLonga - (cicloCount % timeConfig.intervaloPausaLonga)}`
+                }
                 {pomodoroCompletado && " • Pomodoro concluído!"}
             </Typography>
 
