@@ -179,7 +179,34 @@
       "password_hash": "scrypt:32768:8:1$umWEY15pPt2i1Jth$4b0fec22191a08dd008e695c544236aa67e42a634a6408078d3284f080584a4ac67802fd178a5ea07bad02bfc2a9181a10c5d43956556e3a3695bfc786473d37",
       "id": "2fa83d0a-68ac-40f5-af85-3ae3dade39c5",
       "created_at": "2025-08-27T15:03:55.028796",
-      "updated_at": "2025-08-27T15:03:55.028812"
+      "updated_at": "2025-08-27T15:03:55.028812",
+      "tasks": [
+        {
+          "id": "ceea1b29-a118-44fc-9a3c-2ea3e8c1db9a",
+          "title": "Ir pro médico",
+          "description": "Esperar na fila do SUS + médico",
+          "priority": "Saude",
+          "completed": true,
+          "progress": 0,
+          "total": 4,
+          "due_date": null,
+          "created_at": "2025-08-28T10:19:09.803203",
+          "updated_at": "2025-08-28T10:20:06.272029"
+        },
+        {
+          "id": "7bcc6409-68fd-4485-84b2-78b7fad2079a",
+          "title": "Seminário de Redes de Computadores",
+          "description": "",
+          "priority": "Faculdade",
+          "completed": false,
+          "progress": 0,
+          "total": 1,
+          "due_date": null,
+          "created_at": "2025-08-28T10:19:38.508607",
+          "updated_at": "2025-08-28T11:18:53.446809"
+        }
+      ],
+      "pomodoro_sessions": []
     }
   ],
   "tasks": [],
