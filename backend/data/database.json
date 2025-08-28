@@ -44,7 +44,106 @@
       "password_hash": "scrypt:32768:8:1$kCJ7ADOLOLw335SW$caade24a9b564650febb076a144d8861c2292907ddf14bd4d47a790bd1954408dadc5a1115c1a5f178c56885c76face91b6f6adfa3a53d4a08a5cddda91702f2",
       "id": "26024999-ace1-4a8f-9335-158fbd0673ef",
       "created_at": "2025-08-26T15:23:04.434696",
-      "updated_at": "2025-08-26T15:23:04.434743"
+      "updated_at": "2025-08-26T15:23:04.434743",
+      "tasks": [
+        {
+          "id": "0f66f1bd-1f4f-4355-90ed-c892ebb0d20c",
+          "title": "Nova Tarefa",
+          "description": "",
+          "priority": "",
+          "completed": true,
+          "progress": 0,
+          "total": 5,
+          "due_date": null,
+          "created_at": "2025-08-28T03:46:25.694778",
+          "updated_at": "2025-08-28T03:51:18.046309"
+        },
+        {
+          "id": "e76daacf-17b6-41f6-8248-29ef11908879",
+          "title": "Teste",
+          "description": "asdasd",
+          "priority": "Trabalho",
+          "completed": true,
+          "progress": 0,
+          "total": 4,
+          "due_date": null,
+          "created_at": "2025-08-28T04:21:10.856338",
+          "updated_at": "2025-08-28T06:20:24.227359"
+        },
+        {
+          "id": "b97d950f-cd5d-42c7-ae6f-5e4e55a04a6d",
+          "title": "Nova Tarefa",
+          "description": "",
+          "priority": "",
+          "completed": true,
+          "progress": 0,
+          "total": 4,
+          "due_date": null,
+          "created_at": "2025-08-28T05:52:54.973105",
+          "updated_at": "2025-08-28T06:20:55.188633"
+        },
+        {
+          "id": "61d9a016-2543-40c1-9cb1-2218bfe84eeb",
+          "title": "Nova Tarefa",
+          "description": "",
+          "priority": "",
+          "completed": true,
+          "progress": 0,
+          "total": 1,
+          "due_date": null,
+          "created_at": "2025-08-28T06:25:46.866969",
+          "updated_at": "2025-08-28T06:39:33.527499"
+        },
+        {
+          "id": "dfede57c-9857-41a2-8c2a-500408cf5f20",
+          "title": "Nova Tarefa",
+          "description": "",
+          "priority": "",
+          "completed": true,
+          "progress": 0,
+          "total": 1,
+          "due_date": null,
+          "created_at": "2025-08-28T06:30:08.217123",
+          "updated_at": "2025-08-28T06:39:33.008405"
+        },
+        {
+          "id": "9dced56a-e0bb-44f8-a8a3-8a5690bdc40a",
+          "title": "Nova Tarefa",
+          "description": "",
+          "priority": "",
+          "completed": true,
+          "progress": 0,
+          "total": 4,
+          "due_date": null,
+          "created_at": "2025-08-28T06:31:35.542217",
+          "updated_at": "2025-08-28T06:39:32.498984"
+        },
+        {
+          "id": "bad30d65-227b-47f3-bc33-34ddc35d2f6c",
+          "title": "Nova Tarefa",
+          "description": "",
+          "priority": "",
+          "completed": true,
+          "progress": 0,
+          "total": 1,
+          "due_date": null,
+          "created_at": "2025-08-28T06:36:46.423512",
+          "updated_at": "2025-08-28T06:37:08.243987"
+        },
+        {
+          "id": "f6e08590-68d8-4eb6-88f0-a66b43cda9be",
+          "title": "Nova Tarefa",
+          "description": "",
+          "priority": "",
+          "completed": true,
+          "progress": 0,
+          "total": 1,
+          "due_date": null,
+          "created_at": "2025-08-28T06:44:57.563961",
+          "updated_at": "2025-08-28T06:51:57.755264"
+        }
+      ],
+      "pomodoro_sessions": []
     },
     {
       "name": "joao pedro",

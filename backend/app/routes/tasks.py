@@ -29,8 +29,10 @@ def create_task():
             "id": str(uuid.uuid4()),
             "title": title,
             "description": data.get('description', '').strip(),
-            "priority": data.get('priority', 'Normal'),
+            "priority": data.get('priority', ''),
             "completed": bool(data.get('completed', False)),
+            "progress": int(data.get('progress', 0)),  # ← Converter para int
+            "total": int(data.get('total', 0)),        # ← Converter para int
             "due_date": data.get('due_date', None),
             "created_at": datetime.utcnow().isoformat(),
             "updated_at": datetime.utcnow().isoformat(),
@@ -45,6 +47,20 @@ def create_task():
 def update_task(task_id):
     try:
         data = request.get_json(force=True) or {}
+        
+        # Garantir que progress e total sejam convertidos para inteiros
+        if 'progress' in data:
+            try:
+                data['progress'] = int(data['progress'])
+            except (ValueError, TypeError):
+                data['progress'] = 0
+                
+        if 'total' in data:
+            try:
+                data['total'] = int(data['total'])
+            except (ValueError, TypeError):
+                data['total'] = 0
+        
         data['updated_at'] = datetime.utcnow().isoformat()
         updated = update_user_task(request.user_id, task_id, data)
         if not updated:

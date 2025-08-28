@@ -25,6 +25,7 @@ import { apiGet, apiPost, apiPut, apiDelete } from "../services/api";
 const TaskList = ({ onTaskSelect, refresh }) => {
   const [tab, setTab] = useState(0);
   const [editingTaskId, setEditingTaskId] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null); // Novo estado para controlar a seleção única
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,9 +54,8 @@ const TaskList = ({ onTaskSelect, refresh }) => {
     description: frontendTask.obs,
     completed: !!frontendTask.checked,
     priority: frontendTask.tag ?? frontendTask.priority ?? '',
-    // Se um dia quiser persistir progress/total:
-    // progress: frontendTask.progress ?? 0,
-    // total: frontendTask.total ?? 0,
+    progress: frontendTask.progress ?? 0,
+    total: frontendTask.total ?? 0
   });
 
   // Buscar tarefas do backend (por usuário autenticado)
@@ -118,6 +118,12 @@ const TaskList = ({ onTaskSelect, refresh }) => {
     try {
       await apiDelete(`/api/tasks/${taskId}/`);
       setTasks(prev => prev.filter(task => task.id !== taskId));
+      
+      // Desselecionar se a tarefa deletada estava selecionada
+      if (taskId === selectedTaskId) {
+        setSelectedTaskId(null);
+      }
+      
       setSnackbar({ open: true, message: 'Tarefa deletada com sucesso', severity: 'success' });
     } catch (err) {
       console.error('Erro ao deletar tarefa:', err);
@@ -143,6 +149,11 @@ const TaskList = ({ onTaskSelect, refresh }) => {
   const handleTaskToggle = async (taskId, checked) => {
     try {
       await updateTask(taskId, { ...tasks.find(t => t.id === taskId), checked });
+      
+      // Desselecionar se a tarefa for marcada como concluída
+      if (checked && taskId === selectedTaskId) {
+        setSelectedTaskId(null);
+      }
     } catch (err) {
       // Reverter visualmente em caso de erro
       setTasks(prev => prev.map(task => 
@@ -174,14 +185,32 @@ const TaskList = ({ onTaskSelect, refresh }) => {
         obs: "",
         checked: false,
         tag: "",
-        progress: 0,
-        total: 0,
+        progress: 0,  // ← Garantir que está aqui
+        total: 4,     // ← Garantir que está aqui
         status: "ToDo"
       };
       const newTask = await createTask(newTaskData);
       setEditingTaskId(newTask.id);
     } catch (err) {
       console.error('Erro ao criar tarefa:', err);
+    }
+  };
+
+  const handleTaskSelect = (taskId) => {
+    setSelectedTaskId(taskId);
+    // Chamar a função passada por prop, se existir
+    if (onTaskSelect) {
+        const selectedTask = tasks.find(task => task.id === taskId);
+        onTaskSelect(selectedTask); // Agora passa o objeto completo da tarefa
+    }
+};
+
+  // Função para desselecionar uma tarefa
+  const handleTaskDeselect = () => {
+    setSelectedTaskId(null);
+    // Chamar a função passada por prop, se existir
+    if (onTaskSelect) {
+      onTaskSelect(null);
     }
   };
 
@@ -205,7 +234,11 @@ const TaskList = ({ onTaskSelect, refresh }) => {
     <Box p={2} sx={{ minWidth: { md: '90vh', xs: '40vh' }, bgcolor: 'white.basic', borderRadius: 2 }} >
       {/* Header com tabs e filtros */}
       <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ borderBottom: '1px solid', borderColor: '#bebebeff' }}>
-        <Tabs value={tab} onChange={(e, newVal) => setTab(newVal)}>
+        <Tabs value={tab} onChange={(e, newVal) => {
+          setTab(newVal);
+          // Desselecionar ao mudar de aba
+          setSelectedTaskId(null);
+        }}>
           <Tab label="TAREFAS" />
           <Tab label="CONCLUÍDAS" />
         </Tabs>
@@ -243,9 +276,17 @@ const TaskList = ({ onTaskSelect, refresh }) => {
               onToggle={handleTaskToggle}
               onUpdate={handleTaskUpdate}
               onDelete={handleTaskDelete}
-              onSelect={onTaskSelect}
+              onSelect={handleTaskSelect}
+              onDeselect={handleTaskDeselect}
               isEditing={editingTaskId === task.id}
-              onEditToggle={setEditingTaskId}
+              onEditToggle={(taskId) => {
+                setEditingTaskId(taskId);
+                // Desselecionar ao editar
+                if (taskId === selectedTaskId) {
+                  setSelectedTaskId(null);
+                }
+              }}
+              isSelected={task.id === selectedTaskId}
             />
           ))
         )}

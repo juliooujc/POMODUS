@@ -10,18 +10,19 @@ import {
     FormControl, 
     Select,
     MenuItem,
-    InputLabel
+    InputLabel,
+    Button
 } from "@mui/material";
 
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onEditToggle }) => {
+const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onEditToggle, isSelected, onDeselect }) => {
     const [editData, setEditData] = useState({
         titulo: task.titulo,
         obs: task.obs,
         progress: task.progress,
-        total: task.total,
+        total: task.total || 4,
         tag: task.tag
     });
 
@@ -50,7 +51,7 @@ const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onE
             titulo: task.titulo,
             obs: task.obs,
             progress: task.progress,
-            total: task.total,
+            total: task.total || 4, // Default para 4
             tag: task.tag
         });
         onEditToggle(null);
@@ -64,9 +65,17 @@ const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onE
         onToggle(task.id, !task.checked);
     };
 
-    const handleSelect = () => {
+    const handleSelectClick = (e) => {
+        e.stopPropagation();
+        
         if (!isEditing && !task.checked) {
-            onSelect(task);
+            if (isSelected) {
+                // Se já está selecionado, desseleciona
+                onDeselect();
+            } else {
+                // Seleciona esta tarefa
+                onSelect(task.id);
+            }
         }
     };
 
@@ -107,11 +116,13 @@ const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onE
                             type="number"
                             size="small"
                             label="Ciclos"
-                            value={editData.progress}
+                            value={editData.total}
                             onChange={(e) => {
-                                handleInputChange('progress', parseInt(e.target.value) || 0)
-                                console.log("mexi no ciclos: " + e.target.value)
-
+                                const value = parseInt(e.target.value);
+                                // Garante que o valor seja pelo menos 1
+                                if (value >= 1) {
+                                    handleInputChange('total', value);
+                                }
                             }}
                             sx={{ width: 100 }}
                         />
@@ -177,9 +188,9 @@ const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onE
                 mb: 2,
                 borderRadius: 2,
                 backgroundColor: task.checked ? "white.off" : "white.basic",
-                cursor: task.checked ? 'default' : 'pointer'
+                cursor: task.checked ? 'default' : 'pointer',
+                transition: 'all 0.3s ease'
             }}
-            onClick={handleSelect}
         >
             <Box display="flex" alignItems="center" justifyContent="space-between" sx={{color:'text.secondary', gap:2}} >
                 {/* Checkbox + título */}
@@ -197,12 +208,26 @@ const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onE
                     </Typography>
                 </Box>
 
+        
                 {/* Chip e contador */}
                 <Box display="flex" alignItems="center" gap={1} flexWrap="wrap">
-                    <Chip label={task.tag} sx={{bgcolor: tagColors[task.tag], color:'white.basic'}} size="small" />
-                    <Typography variant="body2">
-                        {task.progress}/{task.total}
-                    </Typography>
+                    <Chip 
+                        label={`${task.total} ${task.total === 1 ? 'ciclo' : 'ciclos'}`}
+                        sx={{
+                            bgcolor: tagColors[task.tag],
+                            color: 'white.basic',
+                            height: '24px'
+                        }} 
+                        size="small" 
+                    />
+                    <Chip 
+                        label={task.tag} 
+                        sx={{
+                            bgcolor: tagColors[task.tag], 
+                            color: 'white.basic'
+                        }} 
+                        size="small" 
+                    />
                     <IconButton 
                         size="small" 
                         onClick={(e) => {
@@ -223,7 +248,33 @@ const TaskItem = ({ task, onToggle, onUpdate, onDelete, onSelect, isEditing, onE
                 placeholder="Obs:"
                 value={task.obs}
                 disabled
+                sx={{ mb: 1 }}
             />
+            
+            {/* Botão Selecionar */}
+            <Box display="flex" justifyContent="flex-end">
+                <Button
+                    variant="contained"
+                    size="small"
+                    disabled={task.checked}
+                    sx={{
+                        backgroundColor: isSelected ? '#4caf50' : 'rgba(0, 0, 0, 0.12)',
+                        color: isSelected ? '#fff' : 'rgba(0, 0, 0, 0.38)',
+                        '&:hover': {
+                            backgroundColor: isSelected ? '#388e3c' : 'rgba(0, 0, 0, 0.16)'
+                        },
+                        '&:disabled': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                            color: 'rgba(0, 0, 0, 0.26)'
+                        },
+                        transition: 'all 0.3s ease',
+                        minWidth: '100px'
+                    }}
+                    onClick={handleSelectClick}
+                >
+                    {isSelected ? 'Selecionado' : 'Selecionar'}
+                </Button>
+            </Box>
         </Paper>
     );
 };

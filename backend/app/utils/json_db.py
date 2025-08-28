@@ -139,8 +139,13 @@ def save_user(user: dict) -> bool:
 def ensure_user_containers(user: dict) -> dict:
     # Garante campos novos sem quebrar usuários antigos
     user.setdefault('tasks', [])
-    user.setdefault('stats', {'horasDeFoco': 0, 'diasUsados': 0, 'diasProdutivos': 0})
     user.setdefault('pomodoro_sessions', [])
+    
+    # Garantir que tarefas existentes tenham os campos progress e total
+    for task in user.get('tasks', []):
+        task.setdefault('progress', 0)
+        task.setdefault('total', 0)
+    
     return user
 
 def list_user_tasks(user_id: str) -> list:
@@ -155,6 +160,11 @@ def add_user_task(user_id: str, task: dict) -> dict:
     if not user:
         raise ValueError("Usuário não encontrado")
     user = ensure_user_containers(user)
+    
+    # Garantir que os campos de ciclos existam com valores padrão
+    task.setdefault('progress', 0)
+    task.setdefault('total', 0)
+    
     user['tasks'].append(task)
     if not save_user(user):
         raise RuntimeError("Falha ao salvar usuário")
@@ -168,6 +178,12 @@ def update_user_task(user_id: str, task_id: str, updates: dict) -> Optional[dict
     tasks = user['tasks']
     for i, t in enumerate(tasks):
         if t.get('id') == task_id:
+            # Converter progress e total para inteiros se existirem nos updates
+            if 'progress' in updates:
+                updates['progress'] = int(updates['progress'])
+            if 'total' in updates:
+                updates['total'] = int(updates['total'])
+            
             tasks[i] = {**t, **updates}
             if not save_user(user):
                 return None
