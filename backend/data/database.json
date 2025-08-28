@@ -7,7 +7,35 @@
       "password_hash": "scrypt:32768:8:1$PqIemLRtAusOToXT$401017ac544f8d90266631f4f51dba3b9b97944337c4ab9b43fda47659476f99f1163f8b7ff1647fe5bcef6d6632270eef53f5ee8d08310d1c9a4012138f3a2d",
       "id": "2acf410e-44d9-4439-8dc3-c7d2223c6a25",
       "created_at": "2025-08-26T15:17:40.203626",
-      "updated_at": "2025-08-26T15:17:40.203649"
+      "updated_at": "2025-08-26T15:17:40.203649",
+      "tasks": [
+        {
+          "id": "38a75160-b35a-41e3-a525-3d1fe0830c0b",
+          "title": "Dormir",
+          "description": "dormir 30 minutos de tarde",
+          "priority": "Lazer",
+          "completed": true,
+          "due_date": null,
+          "created_at": "2025-08-28T01:24:05.170641",
+          "updated_at": "2025-08-28T01:24:51.503384"
+        },
+        {
+          "id": "1f0cfff1-8459-422d-9104-470563c37d11",
+          "title": "Estudar React",
+          "description": "estudar 30 min de React",
+          "priority": "Faculdade",
+          "completed": false,
+          "due_date": null,
+          "created_at": "2025-08-28T01:24:59.191676",
+          "updated_at": "2025-08-28T01:25:22.027148"
+        }
+      ],
+      "stats": {
+        "horasDeFoco": 0,
+        "diasUsados": 0,
+        "diasProdutivos": 0
+      },
+      "pomodoro_sessions": []
     },
     {
       "name": "julio cleiton",
@@ -55,79 +83,6 @@
       "updated_at": "2025-08-27T15:03:55.028812"
     }
   ],
-  "tasks": [
-    {
-      "title": "Bora trabalhar",
-      "completed": false,
-      "description": "",
-      "priority": "Lazer",
-      "due_date": null,
-      "id": "340d5691-ce6b-459b-88c0-29b6df0586bb",
-      "created_at": "2025-08-27T12:25:26.298699",
-      "updated_at": "2025-08-27T15:09:18.547117"
-    },
-    {
-      "title": "Nova Tarefa",
-      "completed": false,
-      "description": "",
-      "priority": "",
-      "due_date": null,
-      "id": "ad0dc76e-b839-49f1-b265-c4a2170f3dd1",
-      "created_at": "2025-08-27T15:11:23.393411",
-      "updated_at": "2025-08-27T15:11:28.301033"
-    },
-    {
-      "title": "Nova Tarefa",
-      "completed": false,
-      "description": "",
-      "priority": "",
-      "due_date": null,
-      "id": "2d968cf3-86e8-4d2b-97d2-0aae24a39322",
-      "created_at": "2025-08-27T15:12:58.736962",
-      "updated_at": "2025-08-27T15:13:03.576060",
-      "progress": 2
-    },
-    {
-      "title": "tarefa legal",
-      "completed": false,
-      "description": "",
-      "priority": "",
-      "due_date": null,
-      "id": "ab434532-89b9-4a84-a18c-33e36938929d",
-      "created_at": "2025-08-27T15:16:32.180979",
-      "updated_at": "2025-08-27T15:16:58.634634",
-      "progress": 7
-    },
-    {
-      "title": "Nova Tarefa",
-      "completed": false,
-      "description": "",
-      "priority": "",
-      "due_date": null,
-      "id": "fddd4b38-4468-424d-ba0c-f1e99f1662ce",
-      "created_at": "2025-08-27T15:17:31.198292",
-      "updated_at": "2025-08-27T15:18:22.656263"
-    },
-    {
-      "title": "Nova Tarefa",
-      "completed": false,
-      "description": "",
-      "priority": "",
-      "due_date": null,
-      "id": "bc0653dc-3492-4da7-92ca-f1072b0df35d",
-      "created_at": "2025-08-27T15:18:47.833805",
-      "updated_at": "2025-08-27T15:18:54.618546"
-    },
-    {
-      "title": "Nova Tarefa",
-      "completed": false,
-      "description": "",
-      "priority": "",
-      "due_date": null,
-      "id": "e67fecaf-1761-47ab-9b08-e84c7b7f7e44",
-      "created_at": "2025-08-27T15:19:19.907807",
-      "updated_at": "2025-08-27T15:19:25.147555"
-    }
-  ],
+  "tasks": [],
   "pomodoro_sessions": []
 }

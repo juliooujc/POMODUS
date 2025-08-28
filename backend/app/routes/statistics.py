@@ -1,70 +1,90 @@
-# backend/app/routes/statistics.py
-from flask import Blueprint, jsonify
-from app.utils.json_db import db
+from flask import Blueprint, jsonify, request
 from datetime import datetime, timedelta
+from collections import Counter
+
+from app.routes.auth import require_auth
+from app.utils.json_db import list_user_tasks
 
 statistics_bp = Blueprint('statistics', __name__)
 
 @statistics_bp.route('/', methods=['GET'])
+@require_auth
 def get_statistics():
     try:
-        tasks = db.get_collection('tasks')
-        
-        # --- Métricas Principais ---
+        tasks = list_user_tasks(request.user_id)
+
+        # dias usados considerando created_at / updated_at
         dias_usados = set()
-        for task in tasks:
-            if 'created_at' in task:
-                dias_usados.add(datetime.fromisoformat(task['created_at']).date())
-            if 'updated_at' in task:
-                dias_usados.add(datetime.fromisoformat(task['updated_at']).date())
+        for t in tasks:
+            for key in ('created_at', 'updated_at'):
+                if t.get(key):
+                    try:
+                        d = datetime.fromisoformat(t[key]).date()
+                        dias_usados.add(d)
+                    except Exception:
+                        pass
         total_dias_usados = len(dias_usados)
 
-        horas_de_foco = sum(0.42 for task in tasks if task.get('completed'))
-
+        # dias produtivos = dias com ao menos 1 tarefa marcada como completed
         dias_produtivos = set()
-        for task in tasks:
-            if task.get('completed') and 'updated_at' in task:
-                dias_produtivos.add(datetime.fromisoformat(task['updated_at']).date())
+        for t in tasks:
+            if t.get('completed') and t.get('updated_at'):
+                try:
+                    d = datetime.fromisoformat(t['updated_at']).date()
+                    dias_produtivos.add(d)
+                except Exception:
+                    pass
         total_dias_produtivos = len(dias_produtivos)
 
-        # --- Dados para Gráficos ---
-        hoje = datetime.now()
-        inicio_semana = hoje - timedelta(days=hoje.weekday())
-        inicio_mes = hoje.replace(day=1)
+        # horas de foco (heurística simples baseada em tarefas concluídas)
+        horas_de_foco = sum(0.5 for t in tasks if t.get('completed'))  # 30min por tarefa concluída (ajuste à vontade)
 
-        # Gráfico de Uso (Horas Focadas)
-        dados_uso_semana = [0] * 7 # seg(0)-dom(6)
-        dados_uso_mes = [0] * 31 # dia 1(0)-31(30)
+        hoje = datetime.utcnow().date()
+        semana_inicio = hoje - timedelta(days=6)
+        mes_inicio = hoje - timedelta(days=29)
 
-        # Gráfico de Categoria (Contagem de tarefas por tag)
-        categorias_semana = {}
-        categorias_mes = {}
+        # uso semanal/mensal: quantidade de tarefas tocadas por dia
+        uso_semana = Counter()
+        uso_mes = Counter()
 
-        for task in tasks:
-            if task.get('completed') and 'updated_at' in task:
-                data_tarefa = datetime.fromisoformat(task['updated_at'])
-                tag = task.get('priority', 'Outra')
+        for t in tasks:
+            for key in ('created_at', 'updated_at'):
+                if not t.get(key):
+                    continue
+                try:
+                    dt = datetime.fromisoformat(t[key]).date()
+                except Exception:
+                    continue
+                if dt >= semana_inicio:
+                    uso_semana[dt] += 1
+                if dt >= mes_inicio:
+                    uso_mes[dt] += 1
 
-                # Popula dados de USO (horas focadas)
-                if data_tarefa >= inicio_semana:
-                    dia_da_semana = data_tarefa.weekday() # Segunda é 0, Domingo é 6
-                    dados_uso_semana[dia_da_semana] += 0.42 # Adiciona 25min de foco
+        dados_uso_semana = [float(uso_semana.get(semana_inicio + timedelta(days=i), 0)) for i in range(7)]
+        dados_uso_mes = [float(uso_mes.get(mes_inicio + timedelta(days=i), 0)) for i in range(30)]
 
-                if data_tarefa >= inicio_mes:
-                    dia_do_mes = data_tarefa.day - 1 # dia 1 = índice 0
-                    if dia_do_mes < 31: # Garante que não estoure o array
-                        dados_uso_mes[dia_do_mes] += 0.42
-                
-                # Popula dados de CATEGORIA
-                if data_tarefa >= inicio_semana:
-                    categorias_semana[tag] = categorias_semana.get(tag, 0) + 1
-                
-                if data_tarefa >= inicio_mes:
-                    categorias_mes[tag] = categorias_mes.get(tag, 0) + 1
-
-        # Arredondar os valores de horas para duas casas decimais
-        dados_uso_semana = [round(h, 2) for h in dados_uso_semana]
-        dados_uso_mes = [round(h, 2) for h in dados_uso_mes]
+        # categorias semana/mês (usa campo 'priority' como categoria)
+        categorias_semana = Counter()
+        categorias_mes = Counter()
+        for t in tasks:
+            cat = (t.get('priority') or 'Sem categoria')
+            ref = None
+            if t.get('updated_at'):
+                try:
+                    ref = datetime.fromisoformat(t['updated_at']).date()
+                except Exception:
+                    pass
+            if not ref and t.get('created_at'):
+                try:
+                    ref = datetime.fromisoformat(t['created_at']).date()
+                except Exception:
+                    pass
+            if not ref:
+                continue
+            if ref >= semana_inicio:
+                categorias_semana[cat] += 1
+            if ref >= mes_inicio:
+                categorias_mes[cat] += 1
 
         return jsonify({
             'diasUsados': total_dias_usados,
@@ -75,6 +95,5 @@ def get_statistics():
             'categoriasSemana': [{"label": k, "value": v} for k, v in categorias_semana.items()],
             'categoriasMes': [{"label": k, "value": v} for k, v in categorias_mes.items()],
         })
-
     except Exception as e:
         return jsonify({'error': str(e)}), 500

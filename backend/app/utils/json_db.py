@@ -120,3 +120,67 @@ def init_json_db():
     """Inicializa o banco JSON"""
     db._initialize_file()
     print("Banco JSON inicializado em data/database.json")
+
+# === HELPERS PARA USUÁRIO E TASKS ANINHADAS ===
+
+def get_user_by_id(user_id: str) -> Optional[dict]:
+    users = db.get_collection('users')
+    return next((u for u in users if u.get('id') == user_id), None)
+
+def save_user(user: dict) -> bool:
+    users = db.get_collection('users')
+    idx = next((i for i, u in enumerate(users) if u.get('id') == user.get('id')), None)
+    if idx is None:
+        return False
+    users[idx] = user
+    db.save_collection('users', users)
+    return True
+
+def ensure_user_containers(user: dict) -> dict:
+    # Garante campos novos sem quebrar usuários antigos
+    user.setdefault('tasks', [])
+    user.setdefault('stats', {'horasDeFoco': 0, 'diasUsados': 0, 'diasProdutivos': 0})
+    user.setdefault('pomodoro_sessions', [])
+    return user
+
+def list_user_tasks(user_id: str) -> list:
+    user = get_user_by_id(user_id)
+    if not user:
+        return []
+    user = ensure_user_containers(user)
+    return user['tasks']
+
+def add_user_task(user_id: str, task: dict) -> dict:
+    user = get_user_by_id(user_id)
+    if not user:
+        raise ValueError("Usuário não encontrado")
+    user = ensure_user_containers(user)
+    user['tasks'].append(task)
+    if not save_user(user):
+        raise RuntimeError("Falha ao salvar usuário")
+    return task
+
+def update_user_task(user_id: str, task_id: str, updates: dict) -> Optional[dict]:
+    user = get_user_by_id(user_id)
+    if not user:
+        return None
+    user = ensure_user_containers(user)
+    tasks = user['tasks']
+    for i, t in enumerate(tasks):
+        if t.get('id') == task_id:
+            tasks[i] = {**t, **updates}
+            if not save_user(user):
+                return None
+            return tasks[i]
+    return None
+
+def delete_user_task(user_id: str, task_id: str) -> bool:
+    user = get_user_by_id(user_id)
+    if not user:
+        return False
+    user = ensure_user_containers(user)
+    before = len(user['tasks'])
+    user['tasks'] = [t for t in user['tasks'] if t.get('id') != task_id]
+    if len(user['tasks']) == before:
+        return False
+    return save_user(user)

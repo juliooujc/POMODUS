@@ -29,6 +29,10 @@ const Header = () => {
     localStorage.removeItem("pomodus_user");
     setIsLogged(false);
     navigate("/login");
+    localStorage.removeItem("pomodus_token");
+    localStorage.removeItem("pomodus_user");
+    setIsLogged(false);
+    navigate("/login"); // redireciona para tela de login
   };
 
   const handleLogin = () => {
