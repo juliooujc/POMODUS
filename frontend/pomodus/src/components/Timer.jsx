@@ -42,18 +42,18 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
     };
 
     useEffect(() => {
-    if (selectedTask) {
-        // Reseta o timer e volta para o modo pomodoro
-        setIsRunning(false);
-        setModo('pomodoro');
-        setTimeLeft(timeConfig.pomodoro);
-        setProgress(0);
-        
-        // Mantenha os resets que você já tinha
-        setCompletedCycles(0);
-        setCicloCount(0);
-        setShowCompletionDialog(false);
-    }
+        if (selectedTask) {
+            // Reseta o timer e volta para o modo pomodoro
+            setIsRunning(false);
+            setModo('pomodoro');
+            setTimeLeft(timeConfig.pomodoro);
+            setProgress(0);
+
+            // Mantenha os resets que você já tinha
+            setCompletedCycles(0);
+            setCicloCount(0);
+            setShowCompletionDialog(false);
+        }
     }, [selectedTask, timeConfig.pomodoro]);
 
     useEffect(() => {
@@ -63,7 +63,7 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
             setModo('pomodoro');
             setTimeLeft(timeConfig.pomodoro);
             setProgress(0);
-            
+
             // Reseta os estados de ciclo e conclusão
             setCompletedCycles(0);
             setCicloCount(0);
@@ -131,9 +131,9 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
 
     const handleTimerComplete = async () => {
         if (taskCompleted) return; // Impede execução se tarefa concluída
-        
+
         setIsRunning(false);
-        
+
         let nextMode;
         let shouldIncrementCycle = false;
 
@@ -190,7 +190,7 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
                 const newCycleCount = cicloCount + 1;
                 setCicloCount(newCycleCount);
                 setCompletedCycles(prev => prev + 1);
-                
+
                 // Verificar se a tarefa foi concluída APÓS incrementar
                 if (checkTaskCompletion()) {
                     return;
@@ -200,7 +200,7 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
             setModo(nextMode);
             setTimeLeft(timeConfig[nextMode]);
             setProgress(0);
-            
+
             // Iniciar automaticamente o próximo timer
             setIsRunning(true);
         }, 1000);
@@ -236,17 +236,27 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
         }
     };
 
+    useEffect(() => {
+        if (showCompletionDialog) {
+            const audio = new Audio('/interface/notify.mp3'); // caminho do arquivo
+            audio.play().catch((error) => {
+                console.log("Erro ao tocar som:", error);
+            });
+            // bota pra deixar tarefa concluida aí pode pegar kkkk
+        }
+    }, [showCompletionDialog]);
+
     const handleCloseDialog = () => {
         setShowCompletionDialog(false);
         handleReset();
     };
-    
+
 
     return (
         <>
             <Box p={2} sx={{
-                minWidth: { md: '70vh', xs: '39vh' }, 
-                bgcolor: bgColors[modo], 
+                minWidth: { md: '70vh', xs: '39vh' },
+                bgcolor: bgColors[modo],
                 borderRadius: 4,
                 display: 'flex',
                 flexDirection: 'column',
@@ -281,7 +291,7 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
                         opacity: taskCompleted ? 0.5 : 1,
                         "&:hover": {
                             bgcolor: taskCompleted ? 'transparent' : (modo === 'pomodoro') ? 'white.basic' : 'rgba(255,255,255,0.1)'
-                        }   
+                        }
                     }}>Pomodoro</Button>
                     <Button variant="text" size="small" onClick={handlePausaCurta} disabled={taskCompleted} sx={{
                         textTransform: 'capitalize',
@@ -324,8 +334,8 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
                 </Typography>
 
                 {/* Barra de progresso */}
-                <LinearProgress 
-                    variant="determinate" 
+                <LinearProgress
+                    variant="determinate"
                     value={progress}
                     sx={{
                         width: '60%',
@@ -335,7 +345,7 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
                         '& .MuiLinearProgress-bar': {
                             backgroundColor: 'white.basic',
                         }
-                    }} 
+                    }}
                 />
 
                 {/* Botões de controle */}
@@ -348,12 +358,12 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
                     <IconButton onClick={handleReset} disabled={isRunning || taskCompleted}>
                         <ReplayIcon sx={{ color: taskCompleted ? 'rgba(255,255,255,0.5)' : 'white.basic' }} />
                     </IconButton>
-                    <Button 
-                        variant="contained" 
+                    <Button
+                        variant="contained"
                         onClick={handleStartPause}
                         disabled={taskCompleted}
-                        sx={{ 
-                            bgcolor: taskCompleted ? 'rgba(255,255,255,0.5)' : 'white.basic', 
+                        sx={{
+                            bgcolor: taskCompleted ? 'rgba(255,255,255,0.5)' : 'white.basic',
                             color: bgColors[modo],
                             "&:hover": {
                                 bgcolor: taskCompleted ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.9)'
@@ -370,7 +380,7 @@ const Timer = ({ selectedTask, onTimerComplete, autoCheckTask, onTaskComplete })
             </Box>
 
             {/* Diálogo de conclusão */}
-            <Dialog open={showCompletionDialog} onClose={handleCloseDialog}>
+            <Dialog open={showCompletionDialog} onClose={handleCloseDialog} >
                 <DialogTitle>🎉 Tarefa Concluída!</DialogTitle>
                 <DialogContent>
                     <Typography>

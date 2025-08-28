@@ -198,12 +198,60 @@
           "title": "Seminário de Redes de Computadores",
           "description": "",
           "priority": "Faculdade",
-          "completed": false,
+          "completed": true,
           "progress": 0,
           "total": 1,
           "due_date": null,
           "created_at": "2025-08-28T10:19:38.508607",
-          "updated_at": "2025-08-28T11:18:53.446809"
+          "updated_at": "2025-08-28T12:48:52.148394"
+        },
+        {
+          "id": "1d33fa5a-9dfa-4ae7-870f-b0a524b652f9",
+          "title": "Procurar meu gato",
+          "description": "",
+          "priority": "Lazer",
+          "completed": false,
+          "progress": 0,
+          "total": 2,
+          "due_date": null,
+          "created_at": "2025-08-28T12:49:51.516534",
+          "updated_at": "2025-08-28T12:52:22.571430"
+        },
+        {
+          "id": "efd7eeb5-542d-44c7-a1aa-abe36c947101",
+          "title": "Preparar o seminário",
+          "description": "Materia: Paradigmas de Linguagem de programação",
+          "priority": "Faculdade",
+          "completed": false,
+          "progress": 0,
+          "total": 6,
+          "due_date": null,
+          "created_at": "2025-08-28T12:50:08.802788",
+          "updated_at": "2025-08-28T12:50:42.217028"
+        },
+        {
+          "id": "0c93dd20-bb76-4016-9b41-4a0dd850aa82",
+          "title": "Fazer o Canva MVP",
+          "description": "fazer isso aí",
+          "priority": "Trabalho",
+          "completed": false,
+          "progress": 0,
+          "total": 4,
+          "due_date": null,
+          "created_at": "2025-08-28T12:50:48.609647",
+          "updated_at": "2025-08-28T12:51:15.586768"
+        },
+        {
+          "id": "eea61840-63c3-409b-8822-e8a8e632f59b",
+          "title": "Beber água",
+          "description": "",
+          "priority": "Saude",
+          "completed": false,
+          "progress": 0,
+          "total": 1,
+          "due_date": null,
+          "created_at": "2025-08-28T12:51:39.442611",
+          "updated_at": "2025-08-28T12:51:59.043042"
         }
       ],
       "pomodoro_sessions": []
